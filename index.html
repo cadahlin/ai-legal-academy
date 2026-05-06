@@ -1,0 +1,1676 @@
+<!doctype html>
+<html lang="sv">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>AI Legal Academy · Praktisk AI-träning direkt i juridiska arbetsflöden</title>
+<meta name="description" content="AI Legal Academy är ett praktiskt utbildningsprogram för jurister. Träning sker direkt i en interaktiv legal AI-miljö med realistiska case, dokument och arbetsflöden." />
+<meta name="theme-color" content="#0D0C0A" />
+<meta property="og:title" content="AI Legal Academy" />
+<meta property="og:description" content="Praktisk AI-träning direkt i juridiska arbetsflöden." />
+<meta property="og:type" content="website" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ---------- Tokens ---------- */
+  :root {
+    --bg: #0D0C0A;
+    --surface: #141412;
+    --surface-2: #181715;
+    --border: #242320;
+    --border-soft: #1c1b18;
+    --text: #F0EDE8;
+    --text-2: #8A8A8A;
+    --text-3: #4A4A4A;
+    --accent: #C8C0B0;
+
+    --display: 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+    --body: 'DM Sans', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+    --radius: 4px;
+    --radius-lg: 6px;
+
+    --section-pad: clamp(56px, 7vw, 96px);
+    --content-w: 1180px;
+    --narrow-w: 880px;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ---------- Reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.55;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* ---------- Layout primitives ---------- */
+  .wrap { width: 100%; max-width: var(--content-w); margin: 0 auto; padding: 0 24px; }
+  .narrow { max-width: var(--narrow-w); margin-left: auto; margin-right: auto; }
+
+  section { padding: var(--section-pad) 0; border-top: 1px solid var(--border); }
+  section:first-of-type { border-top: 0; }
+
+  /* ---------- Typography ---------- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 1px;
+    background: var(--text-3);
+  }
+
+  h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; letter-spacing: -0.01em; margin: 0; color: var(--text); }
+  .h-display {
+    font-size: clamp(56px, 9.5vw, 132px);
+    line-height: 0.96;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+  .h-section {
+    font-size: clamp(34px, 4.4vw, 60px);
+    line-height: 1.04;
+    letter-spacing: -0.018em;
+  }
+  .h-sub {
+    font-size: clamp(24px, 2.4vw, 32px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+  .accent { color: var(--accent); }
+  .italic { font-style: italic; }
+
+  p { margin: 0; }
+  .lede {
+    font-size: clamp(17px, 1.4vw, 19px);
+    line-height: 1.55;
+    color: var(--text);
+  }
+  .body-text { color: var(--text); }
+  .body-text p + p { margin-top: 14px; }
+  .muted { color: var(--text-2); }
+  .small { font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .label-mono {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(13, 12, 10, 0.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    -webkit-backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 240ms var(--ease);
+  }
+  .nav.is-scrolled { border-bottom-color: var(--border); }
+  .nav__inner {
+    max-width: var(--content-w);
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.005em;
+    color: var(--text);
+  }
+  .brand small {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text-2);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-left: 12px;
+    padding-left: 12px;
+    border-left: 1px solid var(--border);
+  }
+  .nav__meta {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--text-2);
+  }
+  @media (max-width: 640px) {
+    .brand small { display: none; }
+    .nav__meta { display: none; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero { padding-top: clamp(64px, 9vw, 120px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 0; }
+  .hero__eyebrow { margin-bottom: 32px; }
+  .hero__heading { max-width: 16ch; margin-bottom: 28px; }
+  .hero__sub { max-width: 62ch; color: var(--text); font-size: clamp(18px, 1.55vw, 22px); line-height: 1.45; }
+  .hero__support { max-width: 60ch; margin-top: 18px; color: var(--text-2); font-size: 16px; line-height: 1.55; }
+
+  .hero__visual { margin-top: clamp(48px, 6vw, 80px); }
+
+  /* ---------- Workspace mockup ---------- */
+  .workspace {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;
+  }
+  .ws-bar {
+    display: flex; align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border);
+    gap: 16px;
+    background: #100F0D;
+  }
+  .ws-dots { display: flex; gap: 6px; }
+  .ws-dots span { width: 8px; height: 8px; border-radius: 50%; background: #2a2925; }
+  .ws-bar__path {
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    letter-spacing: 0.04em;
+  }
+  .ws-bar__right {
+    margin-left: auto; display: flex; gap: 14px; align-items: center;
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.12em; text-transform: uppercase;
+  }
+
+  .ws-grid {
+    display: grid;
+    grid-template-columns: 240px 1fr 320px;
+    min-height: 520px;
+  }
+  @media (max-width: 960px) {
+    .ws-grid { grid-template-columns: 1fr; min-height: 0; }
+    .ws-side, .ws-rail { display: none; }
+  }
+
+  .ws-side {
+    border-right: 1px solid var(--border);
+    padding: 18px 16px;
+    background: #100F0D;
+    font-size: 13px;
+  }
+  .ws-side__group { margin-bottom: 20px; }
+  .ws-side__title {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .ws-side__item {
+    display: flex; align-items: center; gap: 9px;
+    color: var(--text-2);
+    padding: 6px 8px; margin: 0 -8px; border-radius: 3px;
+    font-size: 13.5px;
+  }
+  .ws-side__item.is-active { color: var(--text); background: var(--surface-2); }
+  .ws-side__dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-3); flex-shrink: 0; }
+  .ws-side__item.is-active .ws-side__dot { background: var(--accent); }
+
+  .ws-main {
+    padding: 26px 30px;
+    border-right: 1px solid var(--border);
+    position: relative;
+    background:
+      radial-gradient(1100px 380px at 80% -10%, rgba(200,192,176,0.04), transparent 60%),
+      var(--surface);
+  }
+  .ws-tag {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 10px;
+  }
+  .ws-doc-title {
+    font-family: var(--display); font-size: 26px; line-height: 1.1; font-weight: 700;
+    color: var(--text); margin-bottom: 6px; letter-spacing: -0.01em;
+  }
+  .ws-doc-meta {
+    font-family: var(--mono); font-size: 11.5px; color: var(--text-2);
+    letter-spacing: 0.08em; margin-bottom: 22px;
+  }
+  .ws-doc {
+    font-size: 14px; line-height: 1.7; color: var(--text-2);
+    border-left: 1px solid var(--border); padding-left: 18px;
+  }
+  .ws-doc h5 {
+    font-family: var(--body); font-weight: 500; font-size: 13px; color: var(--text);
+    margin: 0 0 6px; letter-spacing: 0.02em; text-transform: uppercase;
+  }
+  .ws-doc p { margin: 0 0 14px; }
+  .ws-doc .clause { color: var(--text); }
+  .ws-doc mark {
+    background: rgba(200,192,176,0.10);
+    color: var(--text);
+    padding: 1px 3px; border-radius: 2px;
+    border-bottom: 1px solid rgba(200,192,176,0.55);
+  }
+
+  .ws-rail {
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 18px 18px;
+    background: #100F0D;
+  }
+  .ws-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 14px 14px 14px;
+  }
+  .ws-card__head {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-2);
+    margin-bottom: 10px;
+  }
+  .ws-card__head .pip {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+  .ws-card__title {
+    font-family: var(--display); font-size: 17px; line-height: 1.2; font-weight: 700;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .ws-card p { font-size: 13.5px; line-height: 1.5; color: var(--text-2); }
+
+  .ws-prompt {
+    background: #0F0E0C;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-family: var(--mono); font-size: 12.5px;
+    color: var(--text-2); line-height: 1.5;
+  }
+  .ws-prompt em { font-style: normal; color: var(--text); }
+  .ws-answer {
+    border-left: 2px solid var(--accent);
+    padding: 10px 0 10px 14px;
+    font-size: 13.5px; line-height: 1.5; color: var(--text);
+  }
+  .ws-answer strong { color: var(--accent); font-weight: 500; }
+
+  .ws-progress {
+    display: flex; align-items: center; gap: 10px;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-2);
+  }
+  .ws-progress__bar { flex: 1; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .ws-progress__fill { width: 38%; height: 100%; background: var(--accent); }
+
+  /* Floating overlay (case modal) */
+  .ws-overlay {
+    position: absolute;
+    left: 36px;
+    top: 36px;
+    width: 320px;
+    background: rgba(20,20,18,0.96);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  }
+  .ws-overlay__label {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 8px;
+  }
+  .ws-overlay__title {
+    font-family: var(--display); font-size: 19px; line-height: 1.2;
+    color: var(--text); font-weight: 700; margin-bottom: 6px;
+  }
+  .ws-overlay__copy {
+    font-size: 13.5px; line-height: 1.5; color: var(--text-2);
+  }
+  .ws-overlay__steps {
+    margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border);
+    display: flex; gap: 6px;
+  }
+  .ws-overlay__step {
+    flex: 1; height: 3px; background: var(--border); border-radius: 2px;
+  }
+  .ws-overlay__step.done { background: var(--accent); }
+  .ws-overlay__step.active { background: rgba(200,192,176,0.6); }
+
+  @media (max-width: 720px) {
+    .ws-overlay { position: static; width: auto; margin: 16px; }
+  }
+
+  /* ---------- Generic section block ---------- */
+  .sec-head { margin-bottom: clamp(36px, 4vw, 56px); }
+  .sec-head .eyebrow { margin-bottom: 18px; }
+  .sec-head h2 { max-width: 22ch; }
+  .sec-head .lede { margin-top: 18px; max-width: 64ch; color: var(--text-2); }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 64px);
+    align-items: start;
+  }
+  @media (max-width: 860px) {
+    .two-col { grid-template-columns: 1fr; }
+  }
+  .two-col .body-text p { color: var(--text); }
+  .two-col .body-text p + p { margin-top: 16px; }
+
+  /* ---------- Contrast strips (problem section) ---------- */
+  .strips {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  @media (max-width: 720px) { .strips { grid-template-columns: 1fr; } }
+  .strip {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .strip__label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 14px;
+  }
+  .strip__title {
+    font-family: var(--display); font-size: 22px; line-height: 1.2;
+    color: var(--text-2); font-weight: 700; margin-bottom: 8px;
+  }
+  .strip.is-emphasis .strip__label { color: var(--accent); }
+  .strip.is-emphasis .strip__title { color: var(--text); }
+  .strip__list {
+    margin: 0; padding: 0; list-style: none;
+    font-size: 14.5px; color: var(--text-2); line-height: 1.55;
+  }
+  .strip__list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .strip__list li:last-child { border-bottom: 0; }
+  .strip__list li::before {
+    content: ""; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--text-3); flex-shrink: 0;
+  }
+  .strip.is-emphasis .strip__list li::before { background: var(--accent); }
+  .strip.is-emphasis .strip__list li { color: var(--text); }
+
+  /* ---------- Solution workspace (variant) ---------- */
+  .solution-visual { margin-top: clamp(44px, 6vw, 72px); }
+
+  /* ---------- Participant experience: feature grid ---------- */
+  .feat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 960px) { .feat-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .feat-grid { grid-template-columns: 1fr; } }
+
+  .feat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex; flex-direction: column; min-height: 220px;
+    transition: background 240ms var(--ease), border-color 240ms var(--ease);
+  }
+  .feat:hover { background: var(--surface-2); border-color: #2c2b27; }
+  .feat__label {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 14px;
+  }
+  .feat__title {
+    font-family: var(--display); font-size: 22px; line-height: 1.15;
+    color: var(--text); font-weight: 700; margin-bottom: 8px;
+  }
+  .feat__copy { font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .feat__visual {
+    margin-top: 16px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.5;
+    color: var(--text-2);
+    flex: 1;
+  }
+  .feat__visual em { font-style: normal; color: var(--text); }
+  .feat__visual .row {
+    display: flex; align-items: center; gap: 8px; padding: 4px 0;
+  }
+  .feat__visual .row .pip {
+    width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+    flex-shrink: 0;
+  }
+  .feat__visual .check {
+    width: 12px; height: 12px; border: 1px solid var(--accent);
+    border-radius: 2px; flex-shrink: 0; position: relative;
+  }
+  .feat__visual .check.done { background: var(--accent); }
+  .feat__visual .check.done::after {
+    content: ""; position: absolute; left: 3px; top: 1px;
+    width: 4px; height: 7px; border: solid var(--bg);
+    border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+  }
+  .feat__visual .versus {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;
+  }
+  .feat__visual .versus > div {
+    padding: 8px; border: 1px solid var(--border); border-radius: 3px;
+    background: rgba(255,255,255,0.012); color: var(--text-2);
+    font-size: 11.5px; line-height: 1.4;
+  }
+  .feat__visual .versus > div:nth-child(2) { border-color: rgba(200,192,176,0.35); color: var(--text); }
+
+  /* ---------- Use cases ---------- */
+  .uc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 1100px) { .uc-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 820px) { .uc-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .uc-grid { grid-template-columns: 1fr; } }
+
+  .uc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 20px 22px;
+    min-height: 180px;
+    display: flex; flex-direction: column;
+  }
+  .uc__num {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.16em; margin-bottom: 12px;
+  }
+  .uc__title {
+    font-family: var(--display); font-size: 21px; line-height: 1.15;
+    color: var(--text); font-weight: 700; margin-bottom: 8px;
+  }
+  .uc__copy { font-size: 14px; line-height: 1.5; color: var(--text-2); }
+
+  /* ---------- Audience sections (firm / inhouse) ---------- */
+  .aud {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(28px, 4vw, 64px);
+    align-items: start;
+  }
+  @media (max-width: 940px) { .aud { grid-template-columns: 1fr; } }
+
+  .bullet-list {
+    list-style: none; margin: 22px 0 0; padding: 0;
+  }
+  .bullet-list li {
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 14px; align-items: baseline;
+    font-size: 15px; color: var(--text);
+  }
+  .bullet-list li:last-child { border-bottom: 1px solid var(--border); }
+  .bullet-list li::before {
+    content: ""; width: 5px; height: 5px; background: var(--accent);
+    border-radius: 50%; flex-shrink: 0; transform: translateY(7px);
+  }
+
+  /* Firm scenario mockup */
+  .scenario {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    overflow: hidden;
+  }
+  .scenario__head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-bottom: 14px; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+  .scenario__title {
+    font-family: var(--display); font-size: 19px; line-height: 1.15;
+    font-weight: 700; color: var(--text);
+  }
+  .scenario__meta {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-3);
+  }
+  .scenario__body {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 18px;
+  }
+  @media (max-width: 720px) { .scenario__body { grid-template-columns: 1fr; } }
+
+  .scenario__doc {
+    background: #100F0D;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    font-size: 13px; line-height: 1.6; color: var(--text-2);
+  }
+  .scenario__doc h6 {
+    font-family: var(--body); font-size: 11px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.12em; color: var(--text);
+    margin: 0 0 8px;
+  }
+  .scenario__doc mark {
+    background: rgba(200,192,176,0.12);
+    color: var(--text);
+    border-bottom: 1px solid rgba(200,192,176,0.55);
+    padding: 0 2px;
+  }
+  .scenario__panel { display: flex; flex-direction: column; gap: 12px; }
+  .risk {
+    background: #100F0D;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px;
+  }
+  .risk__head {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-2); margin-bottom: 10px;
+  }
+  .risk__row {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 8px 0; border-top: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .risk__row:first-of-type { border-top: 0; padding-top: 0; }
+  .risk__row span:first-child { color: var(--text); }
+  .risk__lvl {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+  }
+  .risk__lvl.med { color: #d6b88a; }
+  .risk__lvl.low { color: var(--text-2); }
+
+  /* Inhouse flow */
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 16px;
+  }
+  @media (max-width: 480px) { .flow { grid-template-columns: 1fr; } }
+  .flow__node {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    position: relative;
+    min-height: 130px;
+  }
+  .flow__num {
+    font-family: var(--mono); font-size: 11px; color: var(--accent);
+    letter-spacing: 0.14em; margin-bottom: 8px;
+  }
+  .flow__name {
+    font-family: var(--display); font-size: 17px; line-height: 1.15;
+    color: var(--text); font-weight: 700; margin-bottom: 6px;
+  }
+  .flow__desc { font-size: 13px; color: var(--text-2); line-height: 1.45; }
+
+  /* ---------- Artifacts library ---------- */
+  .artifacts {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .artifacts__bar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-2);
+    background: #100F0D;
+  }
+  .artifacts__count { margin-left: auto; color: var(--text-3); }
+  .artifacts__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 900px) { .artifacts__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .artifacts__grid { grid-template-columns: 1fr; } }
+
+  .artifact {
+    padding: 18px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    min-height: 130px;
+    display: flex; flex-direction: column;
+  }
+  .artifact__type {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+  }
+  .artifact__name {
+    font-family: var(--display); font-size: 17px; line-height: 1.2;
+    color: var(--text); font-weight: 700; margin-bottom: 6px;
+  }
+  .artifact__meta {
+    font-family: var(--mono); font-size: 11px; color: var(--text-3);
+    margin-top: auto; letter-spacing: 0.06em;
+  }
+
+  /* ---------- Verification checklist ---------- */
+  .verify {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 26px 28px;
+  }
+  .verify__head {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 18px; padding-bottom: 14px;
+    border-bottom: 1px solid var(--border);
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--text-2);
+  }
+  .verify__list { list-style: none; margin: 0; padding: 0; }
+  .verify__list li {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+  }
+  .verify__list li:first-child { border-top: 0; padding-top: 0; }
+  .verify__check {
+    width: 14px; height: 14px; border: 1px solid var(--accent);
+    border-radius: 2px; flex-shrink: 0; position: relative;
+    margin-top: 5px;
+    background: var(--accent);
+  }
+  .verify__check::after {
+    content: ""; position: absolute; left: 4px; top: 1px;
+    width: 4px; height: 8px; border: solid var(--bg);
+    border-width: 0 1.5px 1.5px 0; transform: rotate(45deg);
+  }
+  .verify__row strong {
+    display: block; color: var(--text); font-weight: 500; font-size: 15px;
+    margin-bottom: 2px;
+  }
+  .verify__row span { color: var(--text-2); font-size: 14px; line-height: 1.5; }
+
+  /* ---------- Profile cards ---------- */
+  .profiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 36px;
+  }
+  @media (max-width: 720px) { .profiles { grid-template-columns: 1fr; } }
+  .profile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    display: grid;
+    grid-template-columns: 88px 1fr;
+    gap: 20px;
+    align-items: start;
+  }
+  .profile__photo {
+    width: 88px; height: 88px;
+    border-radius: 50%;
+    background: #1a1916;
+    border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-3);
+    font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    text-align: center; padding: 8px;
+    flex-shrink: 0;
+  }
+  .profile__role {
+    font-family: var(--display); font-size: 20px; line-height: 1.2;
+    color: var(--text); font-weight: 700; margin-bottom: 2px;
+  }
+  .profile__org {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    letter-spacing: 0.06em; margin-bottom: 12px;
+  }
+  .profile__desc {
+    font-size: 14.5px; line-height: 1.55; color: var(--text-2);
+  }
+
+  /* ---------- Format dashboard ---------- */
+  .dash {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .dash__bar {
+    display: flex; gap: 18px; align-items: center;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    background: #100F0D;
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    letter-spacing: 0.04em;
+  }
+  .dash__bar .dash__title { color: var(--text); }
+  .dash__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  @media (max-width: 820px) { .dash__grid { grid-template-columns: 1fr; } }
+
+  .dash__cell {
+    padding: 22px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    min-height: 150px;
+  }
+  .dash__cell:nth-child(3n) { border-right: 0; }
+  .dash__label {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-3); margin-bottom: 12px;
+  }
+  .dash__big {
+    font-family: var(--display); font-size: clamp(40px, 5vw, 60px);
+    line-height: 1; color: var(--text); font-weight: 700;
+    letter-spacing: -0.02em; margin-bottom: 6px;
+  }
+  .dash__small {
+    font-size: 13.5px; color: var(--text-2); line-height: 1.5;
+  }
+  .dash__big.accent { color: var(--accent); }
+  .dash__list { list-style: none; margin: 0; padding: 0; }
+  .dash__list li {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 0; font-size: 13.5px; color: var(--text-2);
+  }
+  .dash__list li::before {
+    content: ""; width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* ---------- Final vision ---------- */
+  .vision {
+    padding: clamp(80px, 11vw, 160px) 0 clamp(64px, 9vw, 120px);
+  }
+  .vision h2 {
+    max-width: 22ch;
+    font-size: clamp(44px, 6.5vw, 88px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+  }
+  .vision .body-text {
+    margin-top: 28px; max-width: 60ch;
+    font-size: clamp(17px, 1.4vw, 19px); line-height: 1.5;
+    color: var(--text);
+  }
+  .vision .body-text p + p { margin-top: 16px; }
+
+  /* ---------- Footer ---------- */
+  .foot {
+    border-top: 1px solid var(--border);
+    padding: 36px 0 48px;
+  }
+  .foot__inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 18px; flex-wrap: wrap;
+  }
+  .foot__brand {
+    font-family: var(--display); font-size: 17px; font-weight: 700;
+    color: var(--text);
+  }
+  .foot__line {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-3);
+  }
+
+  /* ---------- Reveal animation ---------- */
+  .reveal {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 700ms var(--ease), transform 700ms var(--ease);
+    transition-delay: var(--reveal-delay, 0ms);
+    will-change: opacity, transform;
+  }
+  .reveal.is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <div class="brand">AI Legal Academy <small>Praktisk AI-träning</small></div>
+    <div class="nav__meta">Onepager · 2026</div>
+  </div>
+</header>
+
+<!-- ============== 1. HERO ============== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="hero__eyebrow eyebrow">AI Legal Academy</div>
+      <h1 class="h-display hero__heading">
+        Praktisk AI-träning <span class="italic accent">direkt</span> i juridiska arbetsflöden
+      </h1>
+      <p class="hero__sub">
+        AI Legal Academy hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
+      </p>
+      <p class="hero__support">
+        Ett praktiskt utbildningsprogram för juridiska organisationer som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
+      </p>
+    </div>
+
+    <div class="hero__visual reveal" style="--reveal-delay:120ms">
+      <div class="workspace" aria-hidden="true">
+        <div class="ws-bar">
+          <div class="ws-dots"><span></span><span></span><span></span></div>
+          <div class="ws-bar__path">case · m&amp;a / spa-review / change-of-control</div>
+          <div class="ws-bar__right"><span>scenario 02 / 06</span><span>session aktiv</span></div>
+        </div>
+
+        <div class="ws-grid">
+          <aside class="ws-side">
+            <div class="ws-side__group">
+              <div class="ws-side__title">Case</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Briefing</div>
+              <div class="ws-side__item is-active"><span class="ws-side__dot"></span>SPA review</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Riskanalys</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Verifiering</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Sammanfattning</div>
+            </div>
+            <div class="ws-side__group">
+              <div class="ws-side__title">Dokument</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>SPA · v3</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Disclosure letter</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Köparmemo</div>
+            </div>
+          </aside>
+
+          <main class="ws-main">
+            <div class="ws-tag">Aktivt scenario · M&amp;A buy-side</div>
+            <h3 class="ws-doc-title">Share Purchase Agreement</h3>
+            <div class="ws-doc-meta">Section 9 · Change of control · v3 · uppladdat 04.05.2026</div>
+            <div class="ws-doc">
+              <h5>9.1 Trigger events</h5>
+              <p class="clause">Each of the following shall constitute a <mark>Change of Control Event</mark> with respect to the Company: (i) the acquisition by any person of beneficial ownership of more than fifty percent (50%) of the outstanding voting securities; (ii) the consummation of a merger or consolidation in which the existing shareholders cease to hold a majority of the surviving entity.</p>
+              <h5>9.2 Buyer remedies</h5>
+              <p>Upon the occurrence of a Change of Control Event, the Buyer shall be entitled to <mark>terminate this Agreement</mark> by written notice within thirty (30) days, without liability for any termination fee.</p>
+            </div>
+          </main>
+
+          <aside class="ws-rail">
+            <div class="ws-card">
+              <div class="ws-card__head"><span class="pip"></span>AI · Klausulanalys</div>
+              <div class="ws-card__title">Två relevanta klausuler identifierade</div>
+              <div class="ws-prompt">
+                Extract clauses related to <em>change of control</em> and summarise buyer remedies.
+              </div>
+              <div class="ws-answer" style="margin-top:10px">
+                <strong>9.1</strong> definierar Change of Control som överlåtelse av &gt;50% rösträtt. <strong>9.2</strong> ger köparen rätt att säga upp avtalet inom 30 dagar utan termination fee.
+              </div>
+            </div>
+
+            <div class="ws-card">
+              <div class="ws-card__head"><span class="pip"></span>Coach · Nästa steg</div>
+              <p>Bedöm den kommersiella risken för köparen och verifiera slutsatsen mot källan.</p>
+            </div>
+
+            <div class="ws-progress">
+              <span>Steg 3 / 8</span>
+              <div class="ws-progress__bar"><div class="ws-progress__fill"></div></div>
+              <span>38%</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="ws-overlay">
+          <div class="ws-overlay__label">Case · Briefing</div>
+          <div class="ws-overlay__title">You are advising a buyer in an M&amp;A transaction.</div>
+          <div class="ws-overlay__copy">Review the SPA and identify potential change of control risks. Verify the conclusion against the source document.</div>
+          <div class="ws-overlay__steps">
+            <span class="ws-overlay__step done"></span>
+            <span class="ws-overlay__step done"></span>
+            <span class="ws-overlay__step active"></span>
+            <span class="ws-overlay__step"></span>
+            <span class="ws-overlay__step"></span>
+            <span class="ws-overlay__step"></span>
+            <span class="ws-overlay__step"></span>
+            <span class="ws-overlay__step"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 2. PROBLEM ============== -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">01 · Problem</div>
+      <h2 class="h-section">AI-access räcker inte för att förändra arbetssätt</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text reveal">
+        <p>Många juridiska organisationer investerar redan i AI genom licenser, pilotprojekt, interna utbildningar och nya verktyg.</p>
+        <p>Men tillgång till AI är inte samma sak som faktisk användning.</p>
+        <p>Traditionella AI-utbildningar skapar ofta förståelse. Deltagarna lär sig begrepp, risker och grundläggande prompting. Men efteråt är steget fortfarande stort från kursrummet till det dagliga juridiska arbetet.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Det är där många initiativ tappar fart.</p>
+        <p>För att AI ska börja användas strukturerat i avtal, due diligence, riskanalys, klientarbete och interna processer krävs något mer än inspiration. Det krävs praktisk träning i realistiska arbetsflöden.</p>
+      </div>
+    </div>
+
+    <div class="strips reveal" style="--reveal-delay:140ms">
+      <div class="strip">
+        <div class="strip__label">Tillgång</div>
+        <div class="strip__title">AI som verktyg</div>
+        <ul class="strip__list">
+          <li>Licenser och plattformsåtkomst</li>
+          <li>Inspirationswebinarier och föreläsningar</li>
+          <li>Generella prompt-tips</li>
+          <li>Pilotprojekt utan strukturerad uppföljning</li>
+        </ul>
+      </div>
+      <div class="strip is-emphasis">
+        <div class="strip__label">Användning</div>
+        <div class="strip__title">AI i det juridiska arbetet</div>
+        <ul class="strip__list">
+          <li>Realistiska case och dokument</li>
+          <li>Träning i faktiska juridiska arbetsflöden</li>
+          <li>Verifiering och juridiskt omdöme</li>
+          <li>Arbetsmetoder som följer med tillbaka till vardagen</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3. SOLUTION ============== -->
+<section id="solution">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">02 · Lösning</div>
+      <h2 class="h-section">Ett praktiskt utbildningsprogram i en interaktiv legal AI-miljö</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text reveal">
+        <p>AI Legal Academy kombinerar live-utbildning med en interaktiv legal AI-miljö där jurister tränar på realistiska juridiska arbetsflöden.</p>
+        <p>Deltagaren arbetar med case, dokument och AI-stöd direkt i miljön, samtidigt som systemet guidar, coachar och förklarar nästa steg.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Det är inte en kurs där juristen först lär sig om AI och sedan själv måste översätta kunskapen till sitt arbete.</p>
+        <p class="accent" style="font-family:var(--display); font-size:24px; line-height:1.2; font-style:italic;">Det är träning i själva arbetssättet.</p>
+      </div>
+    </div>
+
+    <div class="solution-visual reveal" style="--reveal-delay:140ms">
+      <div class="workspace" aria-hidden="true">
+        <div class="ws-bar">
+          <div class="ws-dots"><span></span><span></span><span></span></div>
+          <div class="ws-bar__path">workspace · contract-review / risk-flagging</div>
+          <div class="ws-bar__right"><span>auto-save</span><span>guidning på</span></div>
+        </div>
+        <div class="ws-grid">
+          <aside class="ws-side">
+            <div class="ws-side__group">
+              <div class="ws-side__title">Aktivitet</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Briefing</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Issue spotting</div>
+              <div class="ws-side__item is-active"><span class="ws-side__dot"></span>Klausulanalys</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Riskbedömning</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Verifiering</div>
+            </div>
+            <div class="ws-side__group">
+              <div class="ws-side__title">Verktyg</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Prompt scaffold</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Compare outputs</div>
+              <div class="ws-side__item"><span class="ws-side__dot"></span>Source check</div>
+            </div>
+          </aside>
+
+          <main class="ws-main">
+            <div class="ws-tag">Pågående övning · Klausulanalys</div>
+            <h3 class="ws-doc-title">Commercial agreement</h3>
+            <div class="ws-doc-meta">Section 14 · Limitation of liability</div>
+            <div class="ws-doc">
+              <h5>14.2 Cap on liability</h5>
+              <p>The aggregate liability of the Supplier under or in connection with this Agreement shall not exceed an amount equal to <mark>the fees paid by the Customer in the twelve (12) months preceding the claim</mark>, save for liability arising from gross negligence or wilful misconduct.</p>
+              <h5>14.3 Excluded losses</h5>
+              <p>Neither party shall be liable for indirect or consequential losses, including <mark>loss of profits, loss of business or loss of goodwill</mark>.</p>
+            </div>
+          </main>
+
+          <aside class="ws-rail">
+            <div class="ws-card">
+              <div class="ws-card__head"><span class="pip"></span>Prompt scaffold</div>
+              <div class="ws-prompt">
+                Identifiera och förklara <em>liability cap</em>, <em>carve-outs</em> och <em>excluded losses</em> i Section 14. Citera klausulerna.
+              </div>
+            </div>
+            <div class="ws-card">
+              <div class="ws-card__head"><span class="pip"></span>AI · Svar</div>
+              <div class="ws-answer">
+                Cap motsvarar 12 månaders fees. Carve-out för grov vårdslöshet och uppsåt. Indirekta skador exkluderas, inklusive vinstbortfall och goodwill.
+              </div>
+            </div>
+            <div class="ws-card">
+              <div class="ws-card__head"><span class="pip"></span>Coach</div>
+              <p>Verifiera caret. Stämmer 12-månadersgränsen mot avtalet? Och är carve-outs juridiskt acceptabla för klienten?</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 4. PARTICIPANT EXPERIENCE ============== -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">03 · Upplevelse</div>
+      <h2 class="h-section">Träning i realistiska juridiska scenarier</h2>
+      <p class="lede">
+        Varje övning utgår från ett realistiskt juridiskt scenario. Den interaktiva legal AI-miljön guidar juristen genom uppgiften steg för steg: identifiera relevanta klausuler, formulera bättre AI-instruktioner, jämföra svar, bedöma risk och verifiera slutsatser.
+      </p>
+    </div>
+
+    <p class="lede narrow reveal" style="margin-bottom: 32px; color: var(--text);">
+      Målet är inte bara att förstå vad AI kan göra. Målet är att träna hur juristen faktiskt ska arbeta med AI i en juridisk situation.
+    </p>
+
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <div class="feat__label">01 · Case intro</div>
+        <div class="feat__title">Briefing-modal</div>
+        <div class="feat__copy">Realistisk juridisk briefing sätter upp scenariot, klienten och uppgiften.</div>
+        <div class="feat__visual">
+          <div><em>You are advising a buyer in an M&amp;A transaction.</em></div>
+          <div style="margin-top:6px">Review the SPA and identify potential change of control risks.</div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:60ms">
+        <div class="feat__label">02 · Guidning</div>
+        <div class="feat__title">Steg-för-steg overlay</div>
+        <div class="feat__copy">Coach-overlay leder juristen genom uppgiften utan att avbryta arbetsflödet.</div>
+        <div class="feat__visual">
+          <div class="row"><span class="check done"></span><span>Identifiera relevanta klausuler</span></div>
+          <div class="row"><span class="check done"></span><span>Formulera bättre AI-instruktion</span></div>
+          <div class="row"><span class="check"></span><span>Bedöm kommersiell risk</span></div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:120ms">
+        <div class="feat__label">03 · Workspace</div>
+        <div class="feat__title">Förberedd arbetsyta</div>
+        <div class="feat__copy">Dokument, AI-assistans och anteckningar finns på plats. Inget behöver sättas upp manuellt.</div>
+        <div class="feat__visual">
+          <div class="row"><span class="pip"></span>SPA · v3.pdf</div>
+          <div class="row"><span class="pip"></span>Disclosure letter.pdf</div>
+          <div class="row"><span class="pip"></span>Köparmemo.docx</div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat__label">04 · Prompt scaffold</div>
+        <div class="feat__title">Instruktionsbygge</div>
+        <div class="feat__copy">Strukturerad mall hjälper juristen att formulera precisa AI-instruktioner.</div>
+        <div class="feat__visual">
+          <div><em>Ask the AI to extract relevant clauses from the SPA.</em></div>
+          <div style="margin-top:6px">Roll · Uppgift · Källa · Önskad output</div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:60ms">
+        <div class="feat__label">05 · Feedback</div>
+        <div class="feat__title">AI-feedback på prompten</div>
+        <div class="feat__copy">Återkoppling på vad som saknas i instruktionen och hur den kan göras tydligare.</div>
+        <div class="feat__visual">
+          <div>Saknar rolldefinition.</div>
+          <div>Output-format ej specificerat.</div>
+          <div style="color:var(--accent); margin-top:4px">Förslag: be om citat ur källtexten.</div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:120ms">
+        <div class="feat__label">06 · Compare</div>
+        <div class="feat__title">Jämför AI-svar</div>
+        <div class="feat__copy">Två AI-svar sida vid sida. Juristen bedömer vilket som är mer användbart.</div>
+        <div class="feat__visual">
+          <div class="versus">
+            <div>Generellt sammanfattande svar utan citat.</div>
+            <div>Källcitat och tydlig klausulreferens.</div>
+          </div>
+        </div>
+      </div>
+      <div class="feat reveal">
+        <div class="feat__label">07 · Verifiering</div>
+        <div class="feat__title">Källverifiering</div>
+        <div class="feat__copy">Checklista mot källdokumentet. Juristen behåller ansvaret för slutsatsen.</div>
+        <div class="feat__visual">
+          <div class="row"><span class="check done"></span><span>Klausul citerad korrekt</span></div>
+          <div class="row"><span class="check done"></span><span>Slutsats matchar källa</span></div>
+          <div class="row"><span class="check"></span><span>Inga utelämnade carve-outs</span></div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:60ms">
+        <div class="feat__label">08 · Artifact</div>
+        <div class="feat__title">Takeaway-artefakt</div>
+        <div class="feat__copy">Sparad output, prompt och checklista som följer med tillbaka till arbetet.</div>
+        <div class="feat__visual">
+          <div class="row"><span class="pip"></span>Issue list · M&amp;A buy-side</div>
+          <div class="row"><span class="pip"></span>Prompt · Klausulanalys</div>
+          <div class="row"><span class="pip"></span>Checklista · Verifiering</div>
+        </div>
+      </div>
+      <div class="feat reveal" style="--reveal-delay:120ms">
+        <div class="feat__label">09 · Coach</div>
+        <div class="feat__title">Coach-kommentar</div>
+        <div class="feat__copy">Reflekterande frågor som tränar juridiskt omdöme och perspektivbyte.</div>
+        <div class="feat__visual">
+          <div><em>How would a private equity buyer think differently about this risk?</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 5. USE CASES ============== -->
+<section id="usecases">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">04 · Use cases</div>
+      <h2 class="h-section">Use cases som jurister faktiskt känner igen</h2>
+      <p class="lede">
+        AI Legal Academy tränar inte bara generella AI-färdigheter. Programmet utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.
+      </p>
+    </div>
+
+    <div class="two-col reveal" style="margin-bottom: 36px;">
+      <p class="body-text">Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
+      <p class="body-text muted">Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
+    </div>
+
+    <div class="uc-grid">
+      <div class="uc reveal">
+        <div class="uc__num">01</div>
+        <div class="uc__title">Research &amp; Document Q&amp;A</div>
+        <div class="uc__copy">Ställ frågor mot avtal, bilagor, promemorior, rättsutredningar och andra dokument.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:40ms">
+        <div class="uc__num">02</div>
+        <div class="uc__title">Drafting &amp; Revising</div>
+        <div class="uc__copy">Förbättra klausuler, omformulera avsnitt och skapa första versioner av juridiska texter.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:80ms">
+        <div class="uc__num">03</div>
+        <div class="uc__title">Document Review &amp; Analysis</div>
+        <div class="uc__copy">Identifiera risker, avvikelser, inkonsekvenser och relevanta klausuler i dokument.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:120ms">
+        <div class="uc__num">04</div>
+        <div class="uc__title">Summarize &amp; Report</div>
+        <div class="uc__copy">Sammanfatta juridiska fynd för partner, klient, General Counsel, styrelse eller affärsteam.</div>
+      </div>
+      <div class="uc reveal">
+        <div class="uc__num">05</div>
+        <div class="uc__title">Translation &amp; Tone Adaptation</div>
+        <div class="uc__copy">Översätt, förenkla eller anpassa juridisk text till olika mottagare.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:40ms">
+        <div class="uc__num">06</div>
+        <div class="uc__title">Writing, References &amp; Client Emails</div>
+        <div class="uc__copy">Ta fram klientmail, interna noteringar, mötesuppföljningar och beslutsunderlag.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:80ms">
+        <div class="uc__num">07</div>
+        <div class="uc__title">Knowledge Management</div>
+        <div class="uc__copy">Återanvänd prompts, skapa playbooks och strukturera know how från tidigare ärenden.</div>
+      </div>
+      <div class="uc reveal" style="--reveal-delay:120ms">
+        <div class="uc__num">08</div>
+        <div class="uc__title">Business Support</div>
+        <div class="uc__copy">Stöd för pitches, thought leadership, utbildningsmaterial och intern kommunikation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 6. LAW FIRMS ============== -->
+<section id="firms">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">05 · För advokatbyråer</div>
+      <h2 class="h-section">För advokatbyråer</h2>
+    </div>
+
+    <div class="aud">
+      <div class="reveal">
+        <div class="body-text">
+          <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång.</p>
+          <p style="font-family:var(--display); font-size:26px; line-height:1.2; color:var(--accent); font-style:italic;">Utmaningen är adoption.</p>
+          <p>AI Legal Academy hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet.</p>
+          <p>Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
+        </div>
+
+        <div class="label-mono" style="margin-top: 32px; margin-bottom: 4px;">Programmet hjälper byråer att</div>
+        <ul class="bullet-list">
+          <li>Öka faktisk AI-användning bland jurister</li>
+          <li>Minska tröskeln för att börja använda AI i klientarbete</li>
+          <li>Exponera jurister för realistiska AI-use cases inom juridik</li>
+          <li>Modernisera onboarding och kompetensutveckling</li>
+          <li>Bygga AI-kompetens bortom grundläggande prompting</li>
+          <li>Skapa tryggare och mer strukturerade arbetssätt</li>
+        </ul>
+      </div>
+
+      <div class="reveal" style="--reveal-delay:80ms">
+        <div class="scenario" aria-hidden="true">
+          <div class="scenario__head">
+            <div class="scenario__title">M&amp;A · Buy-side due diligence</div>
+            <div class="scenario__meta">Case 04 / 06</div>
+          </div>
+          <div class="scenario__body">
+            <div class="scenario__doc">
+              <h6>Share Purchase Agreement · §7 Warranties</h6>
+              <p>The Seller warrants that <mark>no material litigation</mark> is pending or threatened against the Company. The Seller further warrants that <mark>all material contracts</mark> have been disclosed in the data room.</p>
+              <p>The Seller’s liability for breach of warranty is <mark>capped at 25% of the purchase price</mark> and limited in time to 24 months from completion.</p>
+            </div>
+            <div class="scenario__panel">
+              <div class="risk">
+                <div class="risk__head">AI · Identifierade risker</div>
+                <div class="risk__row"><span>Material litigation warranty</span><span class="risk__lvl">Hög</span></div>
+                <div class="risk__row"><span>Disclosure scope</span><span class="risk__lvl med">Medel</span></div>
+                <div class="risk__row"><span>Liability cap (25%)</span><span class="risk__lvl med">Medel</span></div>
+                <div class="risk__row"><span>Survival period (24m)</span><span class="risk__lvl low">Låg</span></div>
+              </div>
+              <div class="risk">
+                <div class="risk__head">Coach</div>
+                <div style="font-size:13.5px; color:var(--text-2); line-height:1.5;">Bedöm om 25%-caret är acceptabelt för köparen givet transaktionsstorlek och target-profil.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 7. INHOUSE ============== -->
+<section id="inhouse">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">06 · För inhouse legal teams</div>
+      <h2 class="h-section">För inhouse legal teams</h2>
+    </div>
+
+    <div class="aud">
+      <div class="reveal">
+        <div class="body-text">
+          <p>Många bolagsjuridiska avdelningar står inför samma praktiska fråga:</p>
+          <p style="font-family:var(--display); font-size:24px; line-height:1.25; color:var(--text); font-style:italic; padding-left:16px; border-left:2px solid var(--accent);">
+            ”Vi har tillgång till AI. Men hur använder vi det strukturerat, säkert och effektivt i vardagen?”
+          </p>
+          <p>AI Legal Academy hjälper legal teams träna på de arbetsmoment där AI kan ge störst hävstång: contract review, legal intake, sammanfattningar, riskanalys, intern rådgivning och kommunikation med affärsteam.</p>
+          <p>Målet är inte att ersätta juristen. Målet är att skapa större leverage per jurist genom bättre människa-AI-samspel i återkommande juridiska arbetsflöden.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="--reveal-delay:80ms">
+        <div class="label-mono" style="margin-bottom: 12px;">Inhouse arbetsflöde · exempel</div>
+        <div class="flow">
+          <div class="flow__node">
+            <div class="flow__num">01</div>
+            <div class="flow__name">Legal intake</div>
+            <div class="flow__desc">Affärsteam skickar in en förfrågan med bakgrund och bilagor.</div>
+          </div>
+          <div class="flow__node">
+            <div class="flow__num">02</div>
+            <div class="flow__name">Contract review</div>
+            <div class="flow__desc">AI extraherar nyckelklausuler och flaggar avvikelser mot playbook.</div>
+          </div>
+          <div class="flow__node">
+            <div class="flow__num">03</div>
+            <div class="flow__name">Issue list</div>
+            <div class="flow__desc">Strukturerad lista över risker som juristen verifierar och prioriterar.</div>
+          </div>
+          <div class="flow__node">
+            <div class="flow__num">04</div>
+            <div class="flow__name">Business summary</div>
+            <div class="flow__desc">Affärsanpassad sammanfattning till stakeholder med rekommendation.</div>
+          </div>
+        </div>
+
+        <div class="label-mono" style="margin-top: 28px; margin-bottom: 4px;">Återkommande arbetsmoment</div>
+        <ul class="bullet-list">
+          <li>Contract review mot intern playbook</li>
+          <li>Legal intake och triage av affärsförfrågningar</li>
+          <li>Sammanfattningar för stakeholders och styrelse</li>
+          <li>Riskanalys och prioritering av issues</li>
+          <li>Intern rådgivning och kommunikation med affärsteam</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 8. WHAT PARTICIPANTS LEAVE WITH ============== -->
+<section id="takeaway">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">07 · Takeaway</div>
+      <h2 class="h-section">Deltagaren lämnar inte kursen med bara anteckningar</h2>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text reveal">
+        <p>Målet är inte att juristen ska memorera teori om AI.</p>
+        <p>Målet är att deltagaren ska förstå, konkret och praktiskt, vilka typer av juridiskt arbete som faktiskt kan förbättras med moderna AI-verktyg, hur man arbetar med dem och var begränsningarna finns.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Under övningarna bygger deltagaren dessutom upp egna artefakter direkt i miljön. Det gör att lärandet inte stannar i kursrummet. Deltagaren tar med sig arbetssätt som kan användas vidare i verkligt juridiskt arbete.</p>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 40px; --reveal-delay:140ms">
+      <div class="artifacts" aria-hidden="true">
+        <div class="artifacts__bar">
+          <span>Artifact library · sparat under sessionen</span>
+          <span class="artifacts__count">12 objekt</span>
+        </div>
+        <div class="artifacts__grid">
+          <div class="artifact">
+            <div class="artifact__type">Prompt</div>
+            <div class="artifact__name">Klausulanalys · M&amp;A</div>
+            <div class="artifact__meta">v2 · 14:32</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Checklist</div>
+            <div class="artifact__name">Verifiering mot källa</div>
+            <div class="artifact__meta">7 punkter</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Issue list</div>
+            <div class="artifact__name">SPA buy-side risks</div>
+            <div class="artifact__meta">11 issues</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Riskanalys</div>
+            <div class="artifact__name">Limitation of liability</div>
+            <div class="artifact__meta">3 risker</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Sammanfattning</div>
+            <div class="artifact__name">Klientmemo · CoC</div>
+            <div class="artifact__meta">1 sida</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Workflow</div>
+            <div class="artifact__name">Contract review playbook</div>
+            <div class="artifact__meta">5 steg</div>
+          </div>
+          <div class="artifact">
+            <div class="artifact__type">Mall</div>
+            <div class="artifact__name">Due diligence struktur</div>
+            <div class="artifact__meta">v1</div>
+          </div>
+          <div class="artifact" style="border-right:0">
+            <div class="artifact__type">Playbook</div>
+            <div class="artifact__name">Intern AI-rutin</div>
+            <div class="artifact__meta">utkast</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 9. RISK & VERIFICATION ============== -->
+<section id="verify">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">08 · Risk &amp; verifiering</div>
+      <h2 class="h-section">Träning i användning, verifiering och juridiskt omdöme</h2>
+    </div>
+
+    <div class="aud">
+      <div class="reveal">
+        <div class="body-text">
+          <p>AI Legal Academy tränar inte bara hur AI används i juridiskt arbete. Programmet tränar också hur AI-output granskas, verifieras och kvalitetssäkras.</p>
+          <p>Målet är inte blind automatisering.</p>
+          <p style="font-family:var(--display); font-size:24px; line-height:1.2; color:var(--accent); font-style:italic;">Målet är bättre juridiskt arbete med rätt människa-AI-samspel.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="--reveal-delay:80ms">
+        <div class="verify" aria-hidden="true">
+          <div class="verify__head">
+            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>
+            Verifiering · juridiskt omdöme
+          </div>
+          <ul class="verify__list">
+            <li>
+              <span class="verify__check"></span>
+              <div class="verify__row">
+                <strong>Verifiering mot källdokument</strong>
+                <span>Kontroll att slutsatser och citat stämmer med originaltexten.</span>
+              </div>
+            </li>
+            <li>
+              <span class="verify__check"></span>
+              <div class="verify__row">
+                <strong>Bedömning av AI-svarens kvalitet</strong>
+                <span>Är svaret tillräckligt precist, fullständigt och stödbart?</span>
+              </div>
+            </li>
+            <li>
+              <span class="verify__check"></span>
+              <div class="verify__row">
+                <strong>Identifiering av osäkra slutsatser</strong>
+                <span>Markera resonemang som behöver vidare verifiering eller juridisk analys.</span>
+              </div>
+            </li>
+            <li>
+              <span class="verify__check"></span>
+              <div class="verify__row">
+                <strong>Juridiskt omdöme och riskbedömning</strong>
+                <span>Vad är faktiskt risken för klienten i den givna kontexten?</span>
+              </div>
+            </li>
+            <li>
+              <span class="verify__check"></span>
+              <div class="verify__row">
+                <strong>När AI bör användas och inte</strong>
+                <span>Vilka steg passar för AI-stöd och vilka kräver juristen själv?</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 10. PRACTITIONER INPUT ============== -->
+<section id="credibility">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">09 · Praktikerinput</div>
+      <h2 class="h-section">Utvecklat med input från erfarna jurister</h2>
+      <p class="lede">
+        AI Legal Academy bygger på input från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.
+      </p>
+    </div>
+
+    <div class="profiles">
+      <div class="profile reveal">
+        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <div>
+          <div class="profile__role">General Counsel</div>
+          <div class="profile__org">Large technology company in Sweden</div>
+          <div class="profile__desc">Ger inhouse-perspektiv på hur AI kan användas i bolagsjuridik, contract review, legal intake, riskanalys och kommunikation med affärsteam.</div>
+        </div>
+      </div>
+      <div class="profile reveal" style="--reveal-delay:80ms">
+        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <div>
+          <div class="profile__role">Business law firm lawyer</div>
+          <div class="profile__org">Business law firm in Sweden</div>
+          <div class="profile__desc">Ger advokatbyråperspektiv på hur AI kan användas i dokumenttunga arbetsflöden, klientarbete, due diligence, avtal och praktisk kompetensutveckling för jurister.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 11. FORMAT ============== -->
+<section id="format">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">10 · Format</div>
+      <h2 class="h-section">Ett mer praktiskt sätt att träna AI i juridiskt arbete</h2>
+      <p class="lede">
+        AI Legal Academy kombinerar live-sessioner med en interaktiv legal AI-miljö där deltagaren arbetar direkt i realistiska juridiska scenarier.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="dash" aria-hidden="true">
+        <div class="dash__bar">
+          <span class="dash__title">AI Legal Academy · Workspace overview</span>
+          <span style="margin-left:auto">cohort 01 · vt 2026</span>
+        </div>
+        <div class="dash__grid">
+          <div class="dash__cell">
+            <div class="dash__label">Live-sessioner</div>
+            <div class="dash__big accent">06</div>
+            <div class="dash__small">Coachade övningar i grupp och individuellt.</div>
+          </div>
+          <div class="dash__cell">
+            <div class="dash__label">Realistiska case</div>
+            <div class="dash__big">12+</div>
+            <div class="dash__small">M&amp;A, kommersiella avtal, riskanalys och intern rådgivning.</div>
+          </div>
+          <div class="dash__cell">
+            <div class="dash__label">Format</div>
+            <div class="dash__small" style="font-size:14px; color:var(--text);">
+              Live-sessioner och hands-on övningar direkt i den interaktiva legal AI-miljön. Egen workspace per deltagare.
+            </div>
+          </div>
+          <div class="dash__cell">
+            <div class="dash__label">Programmet innehåller</div>
+            <ul class="dash__list">
+              <li>Live-sessioner och coachade övningar</li>
+              <li>Individuell workspace och inloggning</li>
+              <li>Realistiska juridiska case och dokument</li>
+            </ul>
+          </div>
+          <div class="dash__cell">
+            <div class="dash__label">Arbetssätt</div>
+            <ul class="dash__list">
+              <li>Hands-on arbete direkt i AI-miljön</li>
+              <li>Guidning genom overlays och steg-för-steg</li>
+              <li>Feedback på prompts, analys och metod</li>
+            </ul>
+          </div>
+          <div class="dash__cell" style="border-right:0">
+            <div class="dash__label">Output</div>
+            <ul class="dash__list">
+              <li>AI-assisterade workflows</li>
+              <li>Artefakter och prompts att ta med tillbaka</li>
+              <li>Praktiska arbetssätt i realistiska case</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll.</p>
+      <p class="body-text accent" style="font-family:var(--display); font-size:26px; line-height:1.2; font-style:italic;">
+        Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 12. FINAL VISION ============== -->
+<section class="vision" id="vision">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom: 28px;">11 · Vision</div>
+      <h2 class="h-section">För nästa generations juridiska arbete</h2>
+      <div class="body-text">
+        <p>Nästa generations jurister kommer inte bara använda AI ibland.</p>
+        <p>De kommer arbeta i AI-native juridiska arbetsflöden, tillsammans med AI som en integrerad del av arbetet.</p>
+        <p style="font-family:var(--display); font-size:clamp(26px, 3vw, 36px); line-height:1.15; color:var(--accent); font-style:italic; margin-top: 28px;">
+          AI Legal Academy är byggt för att hjälpa jurister ta steget dit i praktiken.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FOOTER ============== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__inner">
+      <div class="foot__brand">AI Legal Academy</div>
+      <div class="foot__line">Practical AI training for legal professionals</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav border on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > 8) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Scroll fade reveal
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+
+</body>
+</html>
