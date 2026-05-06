@@ -370,8 +370,9 @@
   /* ---------- Generic section block ---------- */
   .sec-head { margin-bottom: clamp(36px, 4vw, 56px); }
   .sec-head .eyebrow { margin-bottom: 18px; }
-  .sec-head h2 { max-width: 22ch; }
-  .sec-head .lede { margin-top: 18px; max-width: 64ch; color: var(--text-2); }
+  .sec-head h2 { max-width: 100%; }
+  .sec-head .lede { margin-top: 18px; max-width: 64ch; color: var(--text); }
+  .sec-head .lede + .lede { margin-top: 14px; }
 
   .two-col {
     display: grid;
@@ -690,7 +691,7 @@
     padding-right: 28px;
   }
   .artifact__name {
-    font-family: var(--display); font-size: 17px; line-height: 1.2;
+    font-family: var(--display); font-size: 20px; line-height: 1.2;
     color: var(--text); font-weight: 700; margin-bottom: 6px;
     padding-right: 28px;
   }
@@ -698,8 +699,8 @@
     position: absolute;
     top: 16px;
     right: 16px;
-    width: 18px;
-    height: 18px;
+    width: 36px;
+    height: 36px;
     color: var(--accent);
     opacity: 0.85;
   }
@@ -756,21 +757,27 @@
     border-radius: var(--radius);
     padding: 24px;
     display: grid;
-    grid-template-columns: 88px 1fr;
+    grid-template-columns: 160px 1fr;
     gap: 20px;
     align-items: start;
   }
   .profile__photo {
-    width: 88px; height: 88px;
+    width: 160px; height: 160px;
     border-radius: 50%;
     background: #1a1916;
     border: 1px solid var(--border);
+    flex-shrink: 0;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    aspect-ratio: 1 / 1;
+  }
+  div.profile__photo {
     display: flex; align-items: center; justify-content: center;
     color: var(--text-3);
-    font-family: var(--mono); font-size: 10px;
+    font-family: var(--mono); font-size: 11px;
     letter-spacing: 0.12em; text-transform: uppercase;
     text-align: center; padding: 8px;
-    flex-shrink: 0;
   }
   .profile__role {
     font-family: var(--display); font-size: 20px; line-height: 1.2;
@@ -969,84 +976,7 @@
     </div>
 
     <div class="hero__visual reveal" style="--reveal-delay:120ms">
-      <div class="workspace" aria-hidden="true">
-        <div class="ws-bar">
-          <div class="ws-dots"><span></span><span></span><span></span></div>
-          <div class="ws-bar__path">case · m&amp;a / spa-review / change-of-control</div>
-          <div class="ws-bar__right"><span>scenario 02 / 06</span><span>session aktiv</span></div>
-        </div>
-
-        <div class="ws-grid">
-          <aside class="ws-side">
-            <div class="ws-side__group">
-              <div class="ws-side__title">Case</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Briefing</div>
-              <div class="ws-side__item is-active"><span class="ws-side__dot"></span>SPA review</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Riskanalys</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Verifiering</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Sammanfattning</div>
-            </div>
-            <div class="ws-side__group">
-              <div class="ws-side__title">Dokument</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>SPA · v3</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Disclosure letter</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Köparmemo</div>
-            </div>
-          </aside>
-
-          <main class="ws-main">
-            <div class="ws-tag">Aktivt scenario · M&amp;A buy-side</div>
-            <h3 class="ws-doc-title">Share Purchase Agreement</h3>
-            <div class="ws-doc-meta">Section 9 · Change of control · v3 · uppladdat 04.05.2026</div>
-            <div class="ws-doc">
-              <h5>9.1 Trigger events</h5>
-              <p class="clause">Each of the following shall constitute a <mark>Change of Control Event</mark> with respect to the Company: (i) the acquisition by any person of beneficial ownership of more than fifty percent (50%) of the outstanding voting securities; (ii) the consummation of a merger or consolidation in which the existing shareholders cease to hold a majority of the surviving entity.</p>
-              <h5>9.2 Buyer remedies</h5>
-              <p>Upon the occurrence of a Change of Control Event, the Buyer shall be entitled to <mark>terminate this Agreement</mark> by written notice within thirty (30) days, without liability for any termination fee.</p>
-            </div>
-          </main>
-
-          <aside class="ws-rail">
-            <div class="ws-card">
-              <div class="ws-card__head"><span class="pip"></span>AI · Klausulanalys</div>
-              <div class="ws-card__title">Två relevanta klausuler identifierade</div>
-              <div class="ws-prompt">
-                Extract clauses related to <em>change of control</em> and summarise buyer remedies.
-              </div>
-              <div class="ws-answer" style="margin-top:10px">
-                <strong>9.1</strong> definierar Change of Control som överlåtelse av &gt;50% rösträtt. <strong>9.2</strong> ger köparen rätt att säga upp avtalet inom 30 dagar utan termination fee.
-              </div>
-            </div>
-
-            <div class="ws-card">
-              <div class="ws-card__head"><span class="pip"></span>Coach · Nästa steg</div>
-              <p>Bedöm den kommersiella risken för köparen och verifiera slutsatsen mot källan.</p>
-            </div>
-
-            <div class="ws-progress">
-              <span>Steg 3 / 8</span>
-              <div class="ws-progress__bar"><div class="ws-progress__fill"></div></div>
-              <span>38%</span>
-            </div>
-          </aside>
-        </div>
-
-        <div class="ws-overlay">
-          <div class="ws-overlay__label">Case · Briefing</div>
-          <div class="ws-overlay__title">You are advising a buyer in an M&amp;A transaction.</div>
-          <div class="ws-overlay__copy">Review the SPA and identify potential change of control risks. Verify the conclusion against the source document.</div>
-          <div class="ws-overlay__steps">
-            <span class="ws-overlay__step done"></span>
-            <span class="ws-overlay__step done"></span>
-            <span class="ws-overlay__step active"></span>
-            <span class="ws-overlay__step"></span>
-            <span class="ws-overlay__step"></span>
-            <span class="ws-overlay__step"></span>
-            <span class="ws-overlay__step"></span>
-            <span class="ws-overlay__step"></span>
-          </div>
-        </div>
-      </div>
+      <img src="../1-PreAmble.png" alt="Case intro modal with M&A transaction briefing" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
     </div>
   </div>
 </section>
@@ -1063,11 +993,10 @@
 
     <div class="profiles">
       <div class="profile reveal">
-        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <img src="../3-GC.png" alt="General Counsel" class="profile__photo">
         <div>
           <div class="profile__role">General Counsel</div>
           <div class="profile__org">Large technology company in Sweden</div>
-          <div class="profile__desc">Ger inhouse-perspektiv på hur AI kan användas i bolagsjuridik, contract review, legal intake, riskanalys och kommunikation med affärsteam.</div>
         </div>
       </div>
       <div class="profile reveal" style="--reveal-delay:80ms">
@@ -1075,7 +1004,7 @@
         <div>
           <div class="profile__role">Business law firm lawyer</div>
           <div class="profile__org">Business law firm in Sweden</div>
-          <div class="profile__desc">Ger advokatbyråperspektiv på hur AI kan användas i dokumenttunga arbetsflöden, klientarbete, due diligence, avtal och praktisk kompetensutveckling för jurister.</div>
+          <div style="color: #d97070; font-size: 14px; margin-top: 8px;">TBD</div>
         </div>
       </div>
     </div>
@@ -1096,8 +1025,7 @@
         <p>Traditionella AI-utbildningar skapar ofta förståelse. Deltagarna lär sig begrepp, risker och grundläggande prompting. Men efteråt är steget fortfarande stort från kursrummet till det dagliga juridiska arbetet.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Det är där många initiativ tappar fart.</p>
-        <p>För att AI ska börja användas strukturerat i avtal, due diligence, riskanalys, klientarbete och interna processer krävs något mer än inspiration. Det krävs praktisk träning i realistiska arbetsflöden.</p>
+        <p>Det är där många initiativ tappar fart. För att AI ska börja användas strukturerat i avtal, due diligence, riskanalys, klientarbete och interna processer krävs något mer än inspiration. Det krävs praktisk träning i realistiska arbetsflöden.</p>
       </div>
     </div>
 
@@ -1139,68 +1067,12 @@
         <p>Deltagaren arbetar med case, dokument och AI-stöd direkt i miljön, samtidigt som systemet guidar, coachar och förklarar nästa steg.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Det är inte en kurs där juristen först lär sig om AI och sedan själv måste översätta kunskapen till sitt arbete.</p>
-        <p class="accent" style="font-family:var(--display); font-size:24px; line-height:1.2; font-style:italic;">Det är träning i själva arbetssättet.</p>
+        <p>Det är inte en kurs där juristen först lär sig om AI och sedan själv måste översätta kunskapen till sitt arbete. Det är träning i själva arbetssättet.</p>
       </div>
     </div>
 
     <div class="solution-visual reveal" style="--reveal-delay:140ms">
-      <div class="workspace" aria-hidden="true">
-        <div class="ws-bar">
-          <div class="ws-dots"><span></span><span></span><span></span></div>
-          <div class="ws-bar__path">workspace · contract-review / risk-flagging</div>
-          <div class="ws-bar__right"><span>auto-save</span><span>guidning på</span></div>
-        </div>
-        <div class="ws-grid">
-          <aside class="ws-side">
-            <div class="ws-side__group">
-              <div class="ws-side__title">Aktivitet</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Briefing</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Issue spotting</div>
-              <div class="ws-side__item is-active"><span class="ws-side__dot"></span>Klausulanalys</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Riskbedömning</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Verifiering</div>
-            </div>
-            <div class="ws-side__group">
-              <div class="ws-side__title">Verktyg</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Prompt scaffold</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Compare outputs</div>
-              <div class="ws-side__item"><span class="ws-side__dot"></span>Source check</div>
-            </div>
-          </aside>
-
-          <main class="ws-main">
-            <div class="ws-tag">Pågående övning · Klausulanalys</div>
-            <h3 class="ws-doc-title">Commercial agreement</h3>
-            <div class="ws-doc-meta">Section 14 · Limitation of liability</div>
-            <div class="ws-doc">
-              <h5>14.2 Cap on liability</h5>
-              <p>The aggregate liability of the Supplier under or in connection with this Agreement shall not exceed an amount equal to <mark>the fees paid by the Customer in the twelve (12) months preceding the claim</mark>, save for liability arising from gross negligence or wilful misconduct.</p>
-              <h5>14.3 Excluded losses</h5>
-              <p>Neither party shall be liable for indirect or consequential losses, including <mark>loss of profits, loss of business or loss of goodwill</mark>.</p>
-            </div>
-          </main>
-
-          <aside class="ws-rail">
-            <div class="ws-card">
-              <div class="ws-card__head"><span class="pip"></span>Prompt scaffold</div>
-              <div class="ws-prompt">
-                Identifiera och förklara <em>liability cap</em>, <em>carve-outs</em> och <em>excluded losses</em> i Section 14. Citera klausulerna.
-              </div>
-            </div>
-            <div class="ws-card">
-              <div class="ws-card__head"><span class="pip"></span>AI · Svar</div>
-              <div class="ws-answer">
-                Cap motsvarar 12 månaders fees. Carve-out för grov vårdslöshet och uppsåt. Indirekta skador exkluderas, inklusive vinstbortfall och goodwill.
-              </div>
-            </div>
-            <div class="ws-card">
-              <div class="ws-card__head"><span class="pip"></span>Coach</div>
-              <p>Verifiera caret. Stämmer 12-månadersgränsen mot avtalet? Och är carve-outs juridiskt acceptabla för klienten?</p>
-            </div>
-          </aside>
-        </div>
-      </div>
+      <img src="../1-guide.png" alt="Contract review workspace with prompt scaffold and AI feedback" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
     </div>
   </div>
 </section>
@@ -1209,151 +1081,21 @@
 <section id="format">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="h-section">Ett mer praktiskt sätt att träna AI i juridiskt arbete</h2>
+      <h2 class="h-section">Coachad träning i grupp</h2>
       <p class="lede">
         Coachade övningar i grupp och individuellt. Programmet kombinerar livesessioner via videomöten med en interaktiv legal AI-miljö där deltagarna arbetar direkt i realistiska juridiska scenarier.
+      </p>
+      <p class="lede">
+        Alla deltagare får ett eget login till miljön.
       </p>
     </div>
 
     <div class="reveal">
-      <div class="vidcall" aria-label="Placeholder · livesession i grupp via videomöte">
-        <div class="vidcall__bar">
-          <span class="vidcall__title">Live session · cohort 01</span>
-          <span style="margin-left:auto">12 deltagare · session 03 / 06</span>
-          <span class="vidcall__live">Live</span>
-        </div>
-        <div class="vidcall__grid">
-          <div class="vidtile is-host"><div class="vidtile__avatar"></div><div class="vidtile__name">Coach</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
-        </div>
-        <div class="vidcall__hint">
-          <span>[Lägg till bild · gruppsession 4×3]</span>
-          <span>video · audio · share</span>
-        </div>
-      </div>
+      <img src="../3-group.png" alt="AI Legal Academy Workshop - Group video session with 12 participants" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
     </div>
 
     <div class="two-col reveal" style="margin-top: 40px;">
-      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll.</p>
-      <p class="body-text accent" style="font-family:var(--display); font-size:26px; line-height:1.2; font-style:italic;">
-        Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============== 6. PARTICIPANT EXPERIENCE ============== -->
-<section id="experience">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="h-section">Träning i realistiska juridiska scenarier</h2>
-      <p class="lede">
-        Varje övning utgår från ett realistiskt juridiskt scenario. Den interaktiva legal AI-miljön guidar juristen genom uppgiften steg för steg: identifiera relevanta klausuler, formulera bättre AI-instruktioner, jämföra svar, bedöma risk och verifiera slutsatser.
-      </p>
-    </div>
-
-    <p class="lede narrow reveal" style="margin-bottom: 32px; color: var(--text);">
-      Målet är inte bara att förstå vad AI kan göra. Målet är att träna hur juristen faktiskt ska arbeta med AI i en juridisk situation.
-    </p>
-
-    <div class="feat-grid">
-      <div class="feat reveal">
-        <div class="feat__label">01 · Case intro</div>
-        <div class="feat__title">Briefing-modal</div>
-        <div class="feat__copy">Realistisk juridisk briefing sätter upp scenariot, klienten och uppgiften.</div>
-        <div class="feat__visual">
-          <div><em>You are advising a buyer in an M&amp;A transaction.</em></div>
-          <div style="margin-top:6px">Review the SPA and identify potential change of control risks.</div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:60ms">
-        <div class="feat__label">02 · Guidning</div>
-        <div class="feat__title">Steg-för-steg overlay</div>
-        <div class="feat__copy">Coach-overlay leder juristen genom uppgiften utan att avbryta arbetsflödet.</div>
-        <div class="feat__visual">
-          <div class="row"><span class="check done"></span><span>Identifiera relevanta klausuler</span></div>
-          <div class="row"><span class="check done"></span><span>Formulera bättre AI-instruktion</span></div>
-          <div class="row"><span class="check"></span><span>Bedöm kommersiell risk</span></div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:120ms">
-        <div class="feat__label">03 · Workspace</div>
-        <div class="feat__title">Förberedd arbetsyta</div>
-        <div class="feat__copy">Dokument, AI-assistans och anteckningar finns på plats. Inget behöver sättas upp manuellt.</div>
-        <div class="feat__visual">
-          <div class="row"><span class="pip"></span>SPA · v3.pdf</div>
-          <div class="row"><span class="pip"></span>Disclosure letter.pdf</div>
-          <div class="row"><span class="pip"></span>Köparmemo.docx</div>
-        </div>
-      </div>
-      <div class="feat reveal">
-        <div class="feat__label">04 · Prompt scaffold</div>
-        <div class="feat__title">Instruktionsbygge</div>
-        <div class="feat__copy">Strukturerad mall hjälper juristen att formulera precisa AI-instruktioner.</div>
-        <div class="feat__visual">
-          <div><em>Ask the AI to extract relevant clauses from the SPA.</em></div>
-          <div style="margin-top:6px">Roll · Uppgift · Källa · Önskad output</div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:60ms">
-        <div class="feat__label">05 · Feedback</div>
-        <div class="feat__title">AI-feedback på prompten</div>
-        <div class="feat__copy">Återkoppling på vad som saknas i instruktionen och hur den kan göras tydligare.</div>
-        <div class="feat__visual">
-          <div>Saknar rolldefinition.</div>
-          <div>Output-format ej specificerat.</div>
-          <div style="color:var(--accent); margin-top:4px">Förslag: be om citat ur källtexten.</div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:120ms">
-        <div class="feat__label">06 · Compare</div>
-        <div class="feat__title">Jämför AI-svar</div>
-        <div class="feat__copy">Två AI-svar sida vid sida. Juristen bedömer vilket som är mer användbart.</div>
-        <div class="feat__visual">
-          <div class="versus">
-            <div>Generellt sammanfattande svar utan citat.</div>
-            <div>Källcitat och tydlig klausulreferens.</div>
-          </div>
-        </div>
-      </div>
-      <div class="feat reveal">
-        <div class="feat__label">07 · Verifiering</div>
-        <div class="feat__title">Källverifiering</div>
-        <div class="feat__copy">Checklista mot källdokumentet. Juristen behåller ansvaret för slutsatsen.</div>
-        <div class="feat__visual">
-          <div class="row"><span class="check done"></span><span>Klausul citerad korrekt</span></div>
-          <div class="row"><span class="check done"></span><span>Slutsats matchar källa</span></div>
-          <div class="row"><span class="check"></span><span>Inga utelämnade carve-outs</span></div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:60ms">
-        <div class="feat__label">08 · Artifact</div>
-        <div class="feat__title">Takeaway-artefakt</div>
-        <div class="feat__copy">Sparad output, prompt och checklista som följer med tillbaka till arbetet.</div>
-        <div class="feat__visual">
-          <div class="row"><span class="pip"></span>Issue list · M&amp;A buy-side</div>
-          <div class="row"><span class="pip"></span>Prompt · Klausulanalys</div>
-          <div class="row"><span class="pip"></span>Checklista · Verifiering</div>
-        </div>
-      </div>
-      <div class="feat reveal" style="--reveal-delay:120ms">
-        <div class="feat__label">09 · Coach</div>
-        <div class="feat__title">Coach-kommentar</div>
-        <div class="feat__copy">Reflekterande frågor som tränar juridiskt omdöme och perspektivbyte.</div>
-        <div class="feat__visual">
-          <div><em>How would a private equity buyer think differently about this risk?</em></div>
-        </div>
-      </div>
+      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll. Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.</p>
     </div>
   </div>
 </section>
@@ -1441,21 +1183,10 @@
 
     <div class="reveal" style="max-width: 64ch;">
       <div class="body-text">
-        <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång.</p>
-        <p style="font-family:var(--display); font-size:26px; line-height:1.2; color:var(--accent); font-style:italic;">Utmaningen är adoption.</p>
-        <p>Programmet hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet.</p>
-        <p>Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
+        <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång. Utmaningen är adoption.</p>
+        <p>Programmet hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet. Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
       </div>
 
-      <div class="label-mono" style="margin-top: 32px; margin-bottom: 4px;">Programmet hjälper byråer att</div>
-      <ul class="bullet-list">
-        <li>Öka faktisk AI-användning bland jurister</li>
-        <li>Minska tröskeln för att börja använda AI i klientarbete</li>
-        <li>Exponera jurister för realistiska AI-use cases inom juridik</li>
-        <li>Modernisera onboarding och kompetensutveckling</li>
-        <li>Bygga AI-kompetens bortom grundläggande prompting</li>
-        <li>Skapa tryggare och mer strukturerade arbetssätt</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -1468,11 +1199,10 @@
     </div>
 
     <div class="reveal" style="max-width: 64ch;">
-      <div class="body-text">
+      <div class=”body-text”>
         <p>Många bolagsjuridiska avdelningar står inför samma praktiska fråga:</p>
-        <p style="font-family:var(--display); font-size:24px; line-height:1.25; color:var(--text); font-style:italic; padding-left:16px; border-left:2px solid var(--accent);">
-          ”Vi har tillgång till AI. Men hur använder vi det strukturerat, säkert och effektivt i vardagen?”
-        </p>
+        <p style=”padding-left:16px; border-left:2px solid var(--accent);”>”Hur kommer jag igång?”</p>
+        <p style=”padding-left:16px; border-left:2px solid var(--accent);”>”Hur kan jag använda AI-verktygen mer?”</p>
         <p>Programmet hjälper legal teams träna på de arbetsmoment där AI kan ge störst hävstång: contract review, legal intake, sammanfattningar, riskanalys, intern rådgivning och kommunikation med affärsteam.</p>
         <p>Målet är inte att ersätta juristen. Målet är att skapa större leverage per jurist genom bättre människa-AI-samspel i återkommande juridiska arbetsflöden.</p>
       </div>
@@ -1501,50 +1231,20 @@
       <div class="artifacts" aria-hidden="true">
         <div class="artifacts__bar">
           <span>Artifact library · sparat under sessionen</span>
-          <span class="artifacts__count">12 objekt</span>
+          <span class="artifacts__count">4 objekt</span>
         </div>
         <div class="artifacts__grid">
           <div class="artifact">
             <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M6 5l-3 4 3 4M12 5l3 4-3 4"/>
             </svg>
-            <div class="artifact__type">Prompt</div>
-            <div class="artifact__name">Klausulanalys · M&amp;A</div>
+            <div class="artifact__name">Prompter</div>
           </div>
           <div class="artifact">
             <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M3 5l1.4 1.4L7 4M3 9l1.4 1.4L7 8M3 13l1.4 1.4L7 12M9.5 5h5.5M9.5 9h5.5M9.5 13h5.5"/>
             </svg>
-            <div class="artifact__type">Checklist</div>
-            <div class="artifact__name">Verifiering mot källa</div>
-          </div>
-          <div class="artifact">
-            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="4" cy="5" r="0.9" fill="currentColor"/>
-              <circle cx="4" cy="9" r="0.9" fill="currentColor"/>
-              <circle cx="4" cy="13" r="0.9" fill="currentColor"/>
-              <path d="M7 5h8M7 9h8M7 13h8"/>
-            </svg>
-            <div class="artifact__type">Issue list</div>
-            <div class="artifact__name">SPA buy-side risks</div>
-          </div>
-          <div class="artifact">
-            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M9 3l7 12H2z"/>
-              <path d="M9 8v3"/>
-              <circle cx="9" cy="13" r="0.6" fill="currentColor"/>
-            </svg>
-            <div class="artifact__type">Riskanalys</div>
-            <div class="artifact__name">Limitation of liability</div>
-          </div>
-          <div class="artifact">
-            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 2h7l3 3v11H4z"/>
-              <path d="M11 2v3h3"/>
-              <path d="M6 9h6M6 12h6M6 6h3"/>
-            </svg>
-            <div class="artifact__type">Sammanfattning</div>
-            <div class="artifact__name">Klientmemo · CoC</div>
+            <div class="artifact__name">Checklistor</div>
           </div>
           <div class="artifact">
             <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1553,24 +1253,15 @@
               <circle cx="14" cy="14" r="2"/>
               <path d="M6 8l6-3M6 10l6 3"/>
             </svg>
-            <div class="artifact__type">Workflow</div>
-            <div class="artifact__name">Contract review playbook</div>
-          </div>
-          <div class="artifact">
-            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="2.5" y="2.5" width="13" height="13"/>
-              <path d="M2.5 7h13M7 7v8.5"/>
-            </svg>
-            <div class="artifact__type">Mall</div>
-            <div class="artifact__name">Due diligence struktur</div>
+            <div class="artifact__name">Skapade flöden</div>
           </div>
           <div class="artifact" style="border-right:0">
             <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 3h5a3 3 0 013 3v9H6a3 3 0 01-3-3z"/>
-              <path d="M15 3h-5a3 3 0 00-3 3v9h5a3 3 0 003-3z"/>
+              <path d="M9 3l7 12H2z"/>
+              <path d="M9 8v3"/>
+              <circle cx="9" cy="13" r="0.6" fill="currentColor"/>
             </svg>
-            <div class="artifact__type">Playbook</div>
-            <div class="artifact__name">Intern AI-rutin</div>
+            <div class="artifact__name">Tips &amp; Tricks</div>
           </div>
         </div>
       </div>
@@ -1635,10 +1326,7 @@
     <div class="reveal">
       <h2 class="h-section">För nästa generations juridiska arbete</h2>
       <div class="body-text">
-        <p>Nästa generations jurister kommer inte bara använda AI ibland, utan arbeta i AI-native juridiska arbetsflöden tillsammans med AI som en integrerad del av arbetet.</p>
-        <p style="font-family:var(--display); font-size:clamp(26px, 3vw, 36px); line-height:1.15; color:var(--accent); font-style:italic; margin-top: 28px;">
-          Programmet är byggt för att hjälpa jurister ta steget dit i praktiken.
-        </p>
+        <p>Nästa generations jurister kommer inte bara använda AI ibland, utan arbeta i AI-native juridiska arbetsflöden tillsammans med AI som en integrerad del av arbetet. Programmet är byggt för att hjälpa jurister ta steget dit i praktiken.</p>
       </div>
     </div>
   </div>
