@@ -176,7 +176,7 @@
   .hero { padding-top: clamp(28px, 4vw, 56px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 0; }
   .hero__heading { max-width: 18ch; margin-bottom: 28px; }
   .hero__sub { max-width: 62ch; color: var(--text); font-size: clamp(18px, 1.55vw, 22px); line-height: 1.45; }
-  .hero__support { max-width: 60ch; margin-top: 18px; color: var(--text-2); font-size: 16px; line-height: 1.55; }
+  .hero__support { max-width: 60ch; margin-top: 18px; color: #ffffff; font-size: 16px; line-height: 1.55; }
 
   .hero__visual { margin-top: clamp(48px, 6vw, 80px); }
 
@@ -396,7 +396,7 @@
   @media (max-width: 720px) { .strips { grid-template-columns: 1fr; } }
   .strip {
     background: var(--surface);
-    border: 1px solid var(--border);
+    border: 1px solid var(--text-2);
     border-radius: var(--radius);
     padding: 24px;
   }
@@ -504,8 +504,8 @@
 
   .uc {
     position: relative;
-    background: var(--surface);
-    border: 1px solid var(--border);
+    background: #1e1d1a;
+    border: 1px solid rgba(240, 237, 232, 0.25);
     border-left: 2px solid var(--accent);
     border-radius: var(--radius);
     padding: 20px 22px;
@@ -530,8 +530,8 @@
     flex-shrink: 0;
   }
   .uc.is-done {
-    background: #16201a;
-    border-color: #28392c;
+    background: #1f3828;
+    border-color: #3a5c42;
     border-left-color: #8fbf8a;
   }
   .uc.is-done .uc__num { color: #8fbf8a; }
@@ -678,29 +678,27 @@
   @media (max-width: 520px) { .artifacts__grid { grid-template-columns: 1fr; } }
 
   .artifact {
-    position: relative;
-    padding: 18px;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    min-height: 120px;
+    padding: 20px;
+    border: 1px solid var(--text-3);
+    border-radius: var(--radius);
+    margin: 4px;
+    min-height: 140px;
     display: flex; flex-direction: column;
+    background: var(--surface-2);
   }
   .artifact__type {
     font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
-    padding-right: 28px;
   }
   .artifact__name {
-    font-family: var(--display); font-size: 20px; line-height: 1.2;
-    color: var(--text); font-weight: 700; margin-bottom: 6px;
-    padding-right: 28px;
+    font-family: var(--display); font-size: 22px; line-height: 1.2;
+    color: var(--text); font-weight: 700;
   }
   .artifact__icon {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 36px;
-    height: 36px;
+    margin-top: auto;
+    padding-top: 16px;
+    width: 32px;
+    height: 32px;
     color: var(--accent);
     opacity: 0.85;
   }
@@ -965,7 +963,7 @@
   <div class="wrap">
     <div class="reveal">
       <h1 class="h-display hero__heading">
-        <span class="italic accent">Interaktiv</span> AI-träning för juridiskt arbete
+        Lär dig AI av juristerna som ligger <span class="italic accent">steget före</span>
       </h1>
       <p class="hero__sub">
         Programmet hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
@@ -986,9 +984,13 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">Utvecklat av jurister som pushar gränserna</h2>
-      <p class="lede">
-        Programmet bygger på input från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.
-      </p>
+    </div>
+
+    <div class="two-col">
+      <div class="body-text reveal">
+        <p style="color: var(--text);">Programmet bygger på insikter från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms"></div>
     </div>
 
     <div class="profiles">
@@ -1064,6 +1066,7 @@
     <div class="two-col">
       <div class="body-text reveal">
         <p>Programmet kombinerar live-utbildning med en interaktiv legal AI-miljö där jurister tränar på realistiska juridiska arbetsflöden.</p>
+        <p>Varje deltagare får ett eget login. Verktyget är open source och liknar i utseende de ledande verktygen.</p>
         <p>Deltagaren arbetar med case, dokument och AI-stöd direkt i miljön, samtidigt som systemet guidar, coachar och förklarar nästa steg.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
@@ -1082,12 +1085,15 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">Coachad träning i grupp</h2>
-      <p class="lede">
-        Coachade övningar i grupp och individuellt. Programmet kombinerar livesessioner via videomöten med en interaktiv legal AI-miljö där deltagarna arbetar direkt i realistiska juridiska scenarier.
-      </p>
-      <p class="lede">
-        Alla deltagare får ett eget login till miljön.
-      </p>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 40px;">
+      <div class="body-text reveal">
+        <p>Coachade övningar i grupp och individuellt. Programmet kombinerar livesessioner via videomöten med en interaktiv legal AI-miljö där deltagarna arbetar direkt i realistiska juridiska scenarier.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Alla deltagare får ett eget login till miljön.</p>
+      </div>
     </div>
 
     <div class="reveal">
@@ -1105,9 +1111,16 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">Use cases som jurister faktiskt känner igen</h2>
-      <p class="lede">Programmet tränar inte bara generella AI-färdigheter. Det utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.</p>
-      <p class="lede">Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
-      <p class="lede">Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 40px;">
+      <div class="body-text reveal">
+        <p>Programmet tränar inte bara generella AI-färdigheter. Det utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.</p>
+        <p>Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
+      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
+      </div>
     </div>
 
     <div class="uc-grid">
@@ -1174,37 +1187,19 @@
   </div>
 </section>
 
-<!-- ============== 8. LAW FIRMS ============== -->
-<section id="firms">
+<!-- ============== 8. AUDIENCES ============== -->
+<section id="audiences">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="h-section">För advokatbyråer</h2>
+      <h2 class="h-section">För advokatbyråer och inhouse legal teams</h2>
     </div>
-
-    <div class="reveal" style="max-width: 64ch;">
-      <div class="body-text">
-        <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång. Utmaningen är adoption.</p>
-        <p>Programmet hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet. Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
+    <div class="two-col">
+      <div class="body-text reveal">
+        <p>Utmaningen är inte längre tillgång till AI. Utmaningen är adoption.</p>
+        <p>Programmet hjälper jurister gå från sporadisk användning till praktiska arbetssätt som faktiskt används i det dagliga arbetet.</p>
       </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ============== 9. INHOUSE ============== -->
-<section id="inhouse">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="h-section">För inhouse legal teams</h2>
-    </div>
-
-    <div class="reveal" style="max-width: 64ch;">
-      <div class=”body-text”>
-        <p>Många bolagsjuridiska avdelningar står inför samma praktiska fråga:</p>
-        <p style=”padding-left:16px; border-left:2px solid var(--accent);”>”Hur kommer jag igång?”</p>
-        <p style=”padding-left:16px; border-left:2px solid var(--accent);”>”Hur kan jag använda AI-verktygen mer?”</p>
-        <p>Programmet hjälper legal teams träna på de arbetsmoment där AI kan ge störst hävstång: contract review, legal intake, sammanfattningar, riskanalys, intern rådgivning och kommunikation med affärsteam.</p>
-        <p>Målet är inte att ersätta juristen. Målet är att skapa större leverage per jurist genom bättre människa-AI-samspel i återkommande juridiska arbetsflöden.</p>
+      <div class="body-text reveal" style="--reveal-delay:80ms">
+        <p>Oavsett om du arbetar på byrå eller inhouse tränar programmet på de arbetsmoment där AI ger störst hävstång: contract review, due diligence, riskanalys och klientkommunikation.</p>
       </div>
     </div>
   </div>
@@ -1219,11 +1214,10 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Målet är inte att juristen ska memorera teori om AI.</p>
-        <p>Målet är att deltagaren ska förstå, konkret och praktiskt, vilka typer av juridiskt arbete som faktiskt kan förbättras med moderna AI-verktyg, hur man arbetar med dem och var begränsningarna finns.</p>
+        <p>Inte teori om AI — utan konkret förståelse för vilka arbetsmoment som faktiskt förbättras med AI, hur man arbetar med dem och var begränsningarna finns.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Under övningarna bygger deltagaren dessutom upp egna artefakter direkt i miljön. Det gör att lärandet inte stannar i kursrummet. Deltagaren tar med sig arbetssätt som kan användas vidare i verkligt juridiskt arbete.</p>
+        <p>Deltagaren bygger upp egna artefakter direkt i miljön och tar med sig arbetssätt som fungerar i verkligt juridiskt arbete.</p>
       </div>
     </div>
 
@@ -1255,7 +1249,7 @@
             </svg>
             <div class="artifact__name">Skapade flöden</div>
           </div>
-          <div class="artifact" style="border-right:0">
+          <div class="artifact">
             <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M9 3l7 12H2z"/>
               <path d="M9 8v3"/>
