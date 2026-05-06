@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AI Legal Academy · Interaktiv AI-träning för juridiskt arbete</title>
-<meta name="description" content="AI Legal Academy är ett praktiskt utbildningsprogram för jurister. Träning sker direkt i en interaktiv legal AI-miljö med realistiska case, dokument och arbetsflöden." />
+<title>Interaktiv AI-träning för juridiskt arbete</title>
+<meta name="description" content="Ett praktiskt utbildningsprogram för jurister. Träning sker direkt i en interaktiv legal AI-miljö med realistiska case, dokument och arbetsflöden." />
 <meta name="theme-color" content="#0D0C0A" />
-<meta property="og:title" content="AI Legal Academy" />
-<meta property="og:description" content="Interaktiv AI-träning för juridiskt arbete." />
+<meta property="og:title" content="Interaktiv AI-träning för juridiskt arbete" />
+<meta property="og:description" content="Praktisk AI-träning för jurister, direkt i en interaktiv legal AI-miljö." />
 <meta property="og:type" content="website" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -502,12 +502,13 @@
   @media (max-width: 520px) { .uc-grid { grid-template-columns: 1fr; } }
 
   .uc {
+    position: relative;
     background: var(--surface);
     border: 1px solid var(--border);
     border-left: 2px solid var(--accent);
     border-radius: var(--radius);
     padding: 20px 22px;
-    min-height: 180px;
+    min-height: 130px;
     display: flex; flex-direction: column;
   }
   .uc__num {
@@ -516,9 +517,23 @@
   }
   .uc__title {
     font-family: var(--display); font-size: 21px; line-height: 1.15;
-    color: var(--text); font-weight: 700; margin-bottom: 8px;
+    color: var(--text); font-weight: 700; margin-bottom: 0;
+    padding-right: 32px;
   }
-  .uc__copy { font-size: 14px; line-height: 1.5; color: var(--text-2); }
+  .uc__icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .uc.is-done {
+    background: #16201a;
+    border-color: #28392c;
+    border-left-color: #8fbf8a;
+  }
+  .uc.is-done .uc__num { color: #8fbf8a; }
 
   /* ---------- Audience sections (firm / inhouse) ---------- */
   .aud {
@@ -662,23 +677,31 @@
   @media (max-width: 520px) { .artifacts__grid { grid-template-columns: 1fr; } }
 
   .artifact {
+    position: relative;
     padding: 18px;
     border-right: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
-    min-height: 130px;
+    min-height: 120px;
     display: flex; flex-direction: column;
   }
   .artifact__type {
     font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--accent); margin-bottom: 10px;
+    padding-right: 28px;
   }
   .artifact__name {
     font-family: var(--display); font-size: 17px; line-height: 1.2;
     color: var(--text); font-weight: 700; margin-bottom: 6px;
+    padding-right: 28px;
   }
-  .artifact__meta {
-    font-family: var(--mono); font-size: 11px; color: var(--text-3);
-    margin-top: auto; letter-spacing: 0.06em;
+  .artifact__icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 18px;
+    height: 18px;
+    color: var(--accent);
+    opacity: 0.85;
   }
 
   /* ---------- Verification checklist ---------- */
@@ -813,6 +836,72 @@
     background: var(--accent);
   }
 
+  /* ---------- Video call placeholder (Format) ---------- */
+  .vidcall {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .vidcall__bar {
+    display: flex; gap: 14px; align-items: center;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    background: #100F0D;
+    font-family: var(--mono); font-size: 12px; color: var(--text-2);
+    letter-spacing: 0.04em;
+  }
+  .vidcall__bar .vidcall__title { color: var(--text); }
+  .vidcall__bar .vidcall__live {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent); text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 10.5px;
+  }
+  .vidcall__bar .vidcall__live::before {
+    content: ""; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .vidcall__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 14px;
+    background: #0F0E0C;
+  }
+  @media (max-width: 720px) { .vidcall__grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 480px) { .vidcall__grid { grid-template-columns: repeat(2, 1fr); } }
+  .vidtile {
+    aspect-ratio: 16 / 10;
+    background: #1a1916;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px;
+    position: relative;
+  }
+  .vidtile__avatar {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: #242320;
+    border: 1px solid #2c2b27;
+  }
+  .vidtile__name {
+    font-family: var(--mono); font-size: 10px; color: var(--text-3);
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+  .vidtile.is-host { border-color: rgba(200,192,176,0.45); }
+  .vidtile.is-host .vidtile__avatar { border-color: var(--accent); }
+  .vidtile.is-host .vidtile__name { color: var(--accent); }
+  .vidcall__hint {
+    padding: 10px 16px;
+    border-top: 1px solid var(--border);
+    background: #100F0D;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--text-3);
+  }
+
   /* ---------- Final vision ---------- */
   .vision {
     padding: clamp(80px, 11vw, 160px) 0 clamp(64px, 9vw, 120px);
@@ -872,7 +961,7 @@
         <span class="italic accent">Interaktiv</span> AI-träning för juridiskt arbete
       </h1>
       <p class="hero__sub">
-        AI Legal Academy hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
+        Programmet hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
       </p>
       <p class="hero__support">
         Ett praktiskt utbildningsprogram för juridiska organisationer som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
@@ -962,11 +1051,42 @@
   </div>
 </section>
 
-<!-- ============== 2. PROBLEM ============== -->
+<!-- ============== 2. PRACTITIONER INPUT ============== -->
+<section id="credibility">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="h-section">Utvecklat av jurister som pushar gränserna</h2>
+      <p class="lede">
+        Programmet bygger på input från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.
+      </p>
+    </div>
+
+    <div class="profiles">
+      <div class="profile reveal">
+        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <div>
+          <div class="profile__role">General Counsel</div>
+          <div class="profile__org">Large technology company in Sweden</div>
+          <div class="profile__desc">Ger inhouse-perspektiv på hur AI kan användas i bolagsjuridik, contract review, legal intake, riskanalys och kommunikation med affärsteam.</div>
+        </div>
+      </div>
+      <div class="profile reveal" style="--reveal-delay:80ms">
+        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <div>
+          <div class="profile__role">Business law firm lawyer</div>
+          <div class="profile__org">Business law firm in Sweden</div>
+          <div class="profile__desc">Ger advokatbyråperspektiv på hur AI kan användas i dokumenttunga arbetsflöden, klientarbete, due diligence, avtal och praktisk kompetensutveckling för jurister.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 3. PROBLEM ============== -->
 <section id="problem">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="h-section">AI-access räcker inte för att förändra arbetssätt</h2>
+      <h2 class="h-section">Powerpoint slides räcker inte för att förändra arbetssätt</h2>
     </div>
 
     <div class="two-col">
@@ -1006,7 +1126,7 @@
   </div>
 </section>
 
-<!-- ============== 3. SOLUTION ============== -->
+<!-- ============== 4. SOLUTION ============== -->
 <section id="solution">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -1015,7 +1135,7 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>AI Legal Academy kombinerar live-utbildning med en interaktiv legal AI-miljö där jurister tränar på realistiska juridiska arbetsflöden.</p>
+        <p>Programmet kombinerar live-utbildning med en interaktiv legal AI-miljö där jurister tränar på realistiska juridiska arbetsflöden.</p>
         <p>Deltagaren arbetar med case, dokument och AI-stöd direkt i miljön, samtidigt som systemet guidar, coachar och förklarar nästa steg.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
@@ -1085,7 +1205,54 @@
   </div>
 </section>
 
-<!-- ============== 4. PARTICIPANT EXPERIENCE ============== -->
+<!-- ============== 5. FORMAT ============== -->
+<section id="format">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2 class="h-section">Ett mer praktiskt sätt att träna AI i juridiskt arbete</h2>
+      <p class="lede">
+        Coachade övningar i grupp och individuellt. Programmet kombinerar livesessioner via videomöten med en interaktiv legal AI-miljö där deltagarna arbetar direkt i realistiska juridiska scenarier.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <div class="vidcall" aria-label="Placeholder · livesession i grupp via videomöte">
+        <div class="vidcall__bar">
+          <span class="vidcall__title">Live session · cohort 01</span>
+          <span style="margin-left:auto">12 deltagare · session 03 / 06</span>
+          <span class="vidcall__live">Live</span>
+        </div>
+        <div class="vidcall__grid">
+          <div class="vidtile is-host"><div class="vidtile__avatar"></div><div class="vidtile__name">Coach</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+          <div class="vidtile"><div class="vidtile__avatar"></div><div class="vidtile__name">Deltagare</div></div>
+        </div>
+        <div class="vidcall__hint">
+          <span>[Lägg till bild · gruppsession 4×3]</span>
+          <span>video · audio · share</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col reveal" style="margin-top: 40px;">
+      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll.</p>
+      <p class="body-text accent" style="font-family:var(--display); font-size:26px; line-height:1.2; font-style:italic;">
+        Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 6. PARTICIPANT EXPERIENCE ============== -->
 <section id="experience">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -1191,183 +1358,129 @@
   </div>
 </section>
 
-<!-- ============== 5. USE CASES ============== -->
+<!-- ============== 7. USE CASES ============== -->
 <section id="usecases">
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">Use cases som jurister faktiskt känner igen</h2>
-      <p class="lede">
-        AI Legal Academy tränar inte bara generella AI-färdigheter. Programmet utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.
-      </p>
-    </div>
-
-    <div class="two-col reveal" style="margin-bottom: 36px;">
-      <p class="body-text">Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
-      <p class="body-text muted">Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
+      <p class="lede">Programmet tränar inte bara generella AI-färdigheter. Det utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.</p>
+      <p class="lede">Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
+      <p class="lede">Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
     </div>
 
     <div class="uc-grid">
-      <div class="uc reveal">
+      <div class="uc is-done reveal">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="9" fill="#8fbf8a"/>
+          <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <div class="uc__num">01</div>
         <div class="uc__title">Research &amp; Document Q&amp;A</div>
-        <div class="uc__copy">Ställ frågor mot avtal, bilagor, promemorior, rättsutredningar och andra dokument.</div>
       </div>
-      <div class="uc reveal" style="--reveal-delay:40ms">
+      <div class="uc is-done reveal" style="--reveal-delay:40ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="9" fill="#8fbf8a"/>
+          <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <div class="uc__num">02</div>
         <div class="uc__title">Drafting &amp; Revising</div>
-        <div class="uc__copy">Förbättra klausuler, omformulera avsnitt och skapa första versioner av juridiska texter.</div>
       </div>
-      <div class="uc reveal" style="--reveal-delay:80ms">
+      <div class="uc is-done reveal" style="--reveal-delay:80ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="9" fill="#8fbf8a"/>
+          <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
         <div class="uc__num">03</div>
         <div class="uc__title">Document Review &amp; Analysis</div>
-        <div class="uc__copy">Identifiera risker, avvikelser, inkonsekvenser och relevanta klausuler i dokument.</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:120ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
         <div class="uc__num">04</div>
         <div class="uc__title">Summarize &amp; Report</div>
-        <div class="uc__copy">Sammanfatta juridiska fynd för partner, klient, General Counsel, styrelse eller affärsteam.</div>
       </div>
       <div class="uc reveal">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
         <div class="uc__num">05</div>
         <div class="uc__title">Translation &amp; Tone Adaptation</div>
-        <div class="uc__copy">Översätt, förenkla eller anpassa juridisk text till olika mottagare.</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:40ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
         <div class="uc__num">06</div>
         <div class="uc__title">Writing, References &amp; Client Emails</div>
-        <div class="uc__copy">Ta fram klientmail, interna noteringar, mötesuppföljningar och beslutsunderlag.</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:80ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
         <div class="uc__num">07</div>
         <div class="uc__title">Knowledge Management</div>
-        <div class="uc__copy">Återanvänd prompts, skapa playbooks och strukturera know how från tidigare ärenden.</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:120ms">
+        <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
+        </svg>
         <div class="uc__num">08</div>
         <div class="uc__title">Business Support</div>
-        <div class="uc__copy">Stöd för pitches, thought leadership, utbildningsmaterial och intern kommunikation.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== 6. LAW FIRMS ============== -->
+<!-- ============== 8. LAW FIRMS ============== -->
 <section id="firms">
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">För advokatbyråer</h2>
     </div>
 
-    <div class="aud">
-      <div class="reveal">
-        <div class="body-text">
-          <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång.</p>
-          <p style="font-family:var(--display); font-size:26px; line-height:1.2; color:var(--accent); font-style:italic;">Utmaningen är adoption.</p>
-          <p>AI Legal Academy hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet.</p>
-          <p>Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
-        </div>
-
-        <div class="label-mono" style="margin-top: 32px; margin-bottom: 4px;">Programmet hjälper byråer att</div>
-        <ul class="bullet-list">
-          <li>Öka faktisk AI-användning bland jurister</li>
-          <li>Minska tröskeln för att börja använda AI i klientarbete</li>
-          <li>Exponera jurister för realistiska AI-use cases inom juridik</li>
-          <li>Modernisera onboarding och kompetensutveckling</li>
-          <li>Bygga AI-kompetens bortom grundläggande prompting</li>
-          <li>Skapa tryggare och mer strukturerade arbetssätt</li>
-        </ul>
+    <div class="reveal" style="max-width: 64ch;">
+      <div class="body-text">
+        <p>Många advokatbyråer har redan investerat i AI-verktyg och interna initiativ. Utmaningen är inte längre tillgång.</p>
+        <p style="font-family:var(--display); font-size:26px; line-height:1.2; color:var(--accent); font-style:italic;">Utmaningen är adoption.</p>
+        <p>Programmet hjälper jurister gå från sporadisk användning och experiment till praktiska arbetssätt som faktiskt används i det dagliga juridiska arbetet.</p>
+        <p>Samtidigt signalerar programmet något viktigt internt och externt: att byrån tar nästa generations juridiska arbete på allvar.</p>
       </div>
 
-      <div class="reveal" style="--reveal-delay:80ms">
-        <div class="scenario" aria-hidden="true">
-          <div class="scenario__head">
-            <div class="scenario__title">M&amp;A · Buy-side due diligence</div>
-            <div class="scenario__meta">Case 04 / 06</div>
-          </div>
-          <div class="scenario__body">
-            <div class="scenario__doc">
-              <h6>Share Purchase Agreement · §7 Warranties</h6>
-              <p>The Seller warrants that <mark>no material litigation</mark> is pending or threatened against the Company. The Seller further warrants that <mark>all material contracts</mark> have been disclosed in the data room.</p>
-              <p>The Seller’s liability for breach of warranty is <mark>capped at 25% of the purchase price</mark> and limited in time to 24 months from completion.</p>
-            </div>
-            <div class="scenario__panel">
-              <div class="risk">
-                <div class="risk__head">AI · Identifierade risker</div>
-                <div class="risk__row"><span>Material litigation warranty</span><span class="risk__lvl">Hög</span></div>
-                <div class="risk__row"><span>Disclosure scope</span><span class="risk__lvl med">Medel</span></div>
-                <div class="risk__row"><span>Liability cap (25%)</span><span class="risk__lvl med">Medel</span></div>
-                <div class="risk__row"><span>Survival period (24m)</span><span class="risk__lvl low">Låg</span></div>
-              </div>
-              <div class="risk">
-                <div class="risk__head">Coach</div>
-                <div style="font-size:13.5px; color:var(--text-2); line-height:1.5;">Bedöm om 25%-caret är acceptabelt för köparen givet transaktionsstorlek och target-profil.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <div class="label-mono" style="margin-top: 32px; margin-bottom: 4px;">Programmet hjälper byråer att</div>
+      <ul class="bullet-list">
+        <li>Öka faktisk AI-användning bland jurister</li>
+        <li>Minska tröskeln för att börja använda AI i klientarbete</li>
+        <li>Exponera jurister för realistiska AI-use cases inom juridik</li>
+        <li>Modernisera onboarding och kompetensutveckling</li>
+        <li>Bygga AI-kompetens bortom grundläggande prompting</li>
+        <li>Skapa tryggare och mer strukturerade arbetssätt</li>
+      </ul>
     </div>
   </div>
 </section>
 
-<!-- ============== 7. INHOUSE ============== -->
+<!-- ============== 9. INHOUSE ============== -->
 <section id="inhouse">
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">För inhouse legal teams</h2>
     </div>
 
-    <div class="aud">
-      <div class="reveal">
-        <div class="body-text">
-          <p>Många bolagsjuridiska avdelningar står inför samma praktiska fråga:</p>
-          <p style="font-family:var(--display); font-size:24px; line-height:1.25; color:var(--text); font-style:italic; padding-left:16px; border-left:2px solid var(--accent);">
-            ”Vi har tillgång till AI. Men hur använder vi det strukturerat, säkert och effektivt i vardagen?”
-          </p>
-          <p>AI Legal Academy hjälper legal teams träna på de arbetsmoment där AI kan ge störst hävstång: contract review, legal intake, sammanfattningar, riskanalys, intern rådgivning och kommunikation med affärsteam.</p>
-          <p>Målet är inte att ersätta juristen. Målet är att skapa större leverage per jurist genom bättre människa-AI-samspel i återkommande juridiska arbetsflöden.</p>
-        </div>
-      </div>
-
-      <div class="reveal" style="--reveal-delay:80ms">
-        <div class="label-mono" style="margin-bottom: 12px;">Inhouse arbetsflöde · exempel</div>
-        <div class="flow">
-          <div class="flow__node">
-            <div class="flow__num">01</div>
-            <div class="flow__name">Legal intake</div>
-            <div class="flow__desc">Affärsteam skickar in en förfrågan med bakgrund och bilagor.</div>
-          </div>
-          <div class="flow__node">
-            <div class="flow__num">02</div>
-            <div class="flow__name">Contract review</div>
-            <div class="flow__desc">AI extraherar nyckelklausuler och flaggar avvikelser mot playbook.</div>
-          </div>
-          <div class="flow__node">
-            <div class="flow__num">03</div>
-            <div class="flow__name">Issue list</div>
-            <div class="flow__desc">Strukturerad lista över risker som juristen verifierar och prioriterar.</div>
-          </div>
-          <div class="flow__node">
-            <div class="flow__num">04</div>
-            <div class="flow__name">Business summary</div>
-            <div class="flow__desc">Affärsanpassad sammanfattning till stakeholder med rekommendation.</div>
-          </div>
-        </div>
-
-        <div class="label-mono" style="margin-top: 28px; margin-bottom: 4px;">Återkommande arbetsmoment</div>
-        <ul class="bullet-list">
-          <li>Contract review mot intern playbook</li>
-          <li>Legal intake och triage av affärsförfrågningar</li>
-          <li>Sammanfattningar för stakeholders och styrelse</li>
-          <li>Riskanalys och prioritering av issues</li>
-          <li>Intern rådgivning och kommunikation med affärsteam</li>
-        </ul>
+    <div class="reveal" style="max-width: 64ch;">
+      <div class="body-text">
+        <p>Många bolagsjuridiska avdelningar står inför samma praktiska fråga:</p>
+        <p style="font-family:var(--display); font-size:24px; line-height:1.25; color:var(--text); font-style:italic; padding-left:16px; border-left:2px solid var(--accent);">
+          ”Vi har tillgång till AI. Men hur använder vi det strukturerat, säkert och effektivt i vardagen?”
+        </p>
+        <p>Programmet hjälper legal teams träna på de arbetsmoment där AI kan ge störst hävstång: contract review, legal intake, sammanfattningar, riskanalys, intern rådgivning och kommunikation med affärsteam.</p>
+        <p>Målet är inte att ersätta juristen. Målet är att skapa större leverage per jurist genom bättre människa-AI-samspel i återkommande juridiska arbetsflöden.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============== 8. WHAT PARTICIPANTS LEAVE WITH ============== -->
+<!-- ============== 10. WHAT PARTICIPANTS LEAVE WITH ============== -->
 <section id="takeaway">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -1392,44 +1505,72 @@
         </div>
         <div class="artifacts__grid">
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M6 5l-3 4 3 4M12 5l3 4-3 4"/>
+            </svg>
             <div class="artifact__type">Prompt</div>
             <div class="artifact__name">Klausulanalys · M&amp;A</div>
-            <div class="artifact__meta">v2 · 14:32</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 5l1.4 1.4L7 4M3 9l1.4 1.4L7 8M3 13l1.4 1.4L7 12M9.5 5h5.5M9.5 9h5.5M9.5 13h5.5"/>
+            </svg>
             <div class="artifact__type">Checklist</div>
             <div class="artifact__name">Verifiering mot källa</div>
-            <div class="artifact__meta">7 punkter</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="4" cy="5" r="0.9" fill="currentColor"/>
+              <circle cx="4" cy="9" r="0.9" fill="currentColor"/>
+              <circle cx="4" cy="13" r="0.9" fill="currentColor"/>
+              <path d="M7 5h8M7 9h8M7 13h8"/>
+            </svg>
             <div class="artifact__type">Issue list</div>
             <div class="artifact__name">SPA buy-side risks</div>
-            <div class="artifact__meta">11 issues</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M9 3l7 12H2z"/>
+              <path d="M9 8v3"/>
+              <circle cx="9" cy="13" r="0.6" fill="currentColor"/>
+            </svg>
             <div class="artifact__type">Riskanalys</div>
             <div class="artifact__name">Limitation of liability</div>
-            <div class="artifact__meta">3 risker</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 2h7l3 3v11H4z"/>
+              <path d="M11 2v3h3"/>
+              <path d="M6 9h6M6 12h6M6 6h3"/>
+            </svg>
             <div class="artifact__type">Sammanfattning</div>
             <div class="artifact__name">Klientmemo · CoC</div>
-            <div class="artifact__meta">1 sida</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="4" cy="9" r="2"/>
+              <circle cx="14" cy="4" r="2"/>
+              <circle cx="14" cy="14" r="2"/>
+              <path d="M6 8l6-3M6 10l6 3"/>
+            </svg>
             <div class="artifact__type">Workflow</div>
             <div class="artifact__name">Contract review playbook</div>
-            <div class="artifact__meta">5 steg</div>
           </div>
           <div class="artifact">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2.5" y="2.5" width="13" height="13"/>
+              <path d="M2.5 7h13M7 7v8.5"/>
+            </svg>
             <div class="artifact__type">Mall</div>
             <div class="artifact__name">Due diligence struktur</div>
-            <div class="artifact__meta">v1</div>
           </div>
           <div class="artifact" style="border-right:0">
+            <svg class="artifact__icon" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3h5a3 3 0 013 3v9H6a3 3 0 01-3-3z"/>
+              <path d="M15 3h-5a3 3 0 00-3 3v9h5a3 3 0 003-3z"/>
+            </svg>
             <div class="artifact__type">Playbook</div>
             <div class="artifact__name">Intern AI-rutin</div>
-            <div class="artifact__meta">utkast</div>
           </div>
         </div>
       </div>
@@ -1437,168 +1578,53 @@
   </div>
 </section>
 
-<!-- ============== 9. RISK & VERIFICATION ============== -->
+<!-- ============== 11. RISK & VERIFICATION ============== -->
 <section id="verify">
   <div class="wrap">
     <div class="sec-head reveal">
       <h2 class="h-section">Träning i användning, verifiering och juridiskt omdöme</h2>
     </div>
 
-    <div class="aud">
-      <div class="reveal">
-        <div class="body-text">
-          <p>AI Legal Academy tränar inte bara hur AI används i juridiskt arbete. Programmet tränar också hur AI-output granskas, verifieras och kvalitetssäkras.</p>
-          <p>Målet är inte blind automatisering.</p>
-          <p style="font-family:var(--display); font-size:24px; line-height:1.2; color:var(--accent); font-style:italic;">Målet är bättre juridiskt arbete med rätt människa-AI-samspel.</p>
-        </div>
-      </div>
-
-      <div class="reveal" style="--reveal-delay:80ms">
-        <div class="verify" aria-hidden="true">
-          <div class="verify__head">
-            <span style="width:6px; height:6px; border-radius:50%; background:var(--accent);"></span>
-            Verifiering · juridiskt omdöme
-          </div>
-          <ul class="verify__list">
-            <li>
-              <span class="verify__check"></span>
-              <div class="verify__row">
-                <strong>Verifiering mot källdokument</strong>
-                <span>Kontroll att slutsatser och citat stämmer med originaltexten.</span>
-              </div>
-            </li>
-            <li>
-              <span class="verify__check"></span>
-              <div class="verify__row">
-                <strong>Bedömning av AI-svarens kvalitet</strong>
-                <span>Är svaret tillräckligt precist, fullständigt och stödbart?</span>
-              </div>
-            </li>
-            <li>
-              <span class="verify__check"></span>
-              <div class="verify__row">
-                <strong>Identifiering av osäkra slutsatser</strong>
-                <span>Markera resonemang som behöver vidare verifiering eller juridisk analys.</span>
-              </div>
-            </li>
-            <li>
-              <span class="verify__check"></span>
-              <div class="verify__row">
-                <strong>Juridiskt omdöme och riskbedömning</strong>
-                <span>Vad är faktiskt risken för klienten i den givna kontexten?</span>
-              </div>
-            </li>
-            <li>
-              <span class="verify__check"></span>
-              <div class="verify__row">
-                <strong>När AI bör användas och inte</strong>
-                <span>Vilka steg passar för AI-stöd och vilka kräver juristen själv?</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== 10. PRACTITIONER INPUT ============== -->
-<section id="credibility">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="h-section">Utvecklat med input från erfarna jurister</h2>
-      <p class="lede">
-        AI Legal Academy bygger på input från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.
-      </p>
-    </div>
-
-    <div class="profiles">
-      <div class="profile reveal">
-        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
-        <div>
-          <div class="profile__role">General Counsel</div>
-          <div class="profile__org">Large technology company in Sweden</div>
-          <div class="profile__desc">Ger inhouse-perspektiv på hur AI kan användas i bolagsjuridik, contract review, legal intake, riskanalys och kommunikation med affärsteam.</div>
-        </div>
-      </div>
-      <div class="profile reveal" style="--reveal-delay:80ms">
-        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
-        <div>
-          <div class="profile__role">Business law firm lawyer</div>
-          <div class="profile__org">Business law firm in Sweden</div>
-          <div class="profile__desc">Ger advokatbyråperspektiv på hur AI kan användas i dokumenttunga arbetsflöden, klientarbete, due diligence, avtal och praktisk kompetensutveckling för jurister.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============== 11. FORMAT ============== -->
-<section id="format">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <h2 class="h-section">Ett mer praktiskt sätt att träna AI i juridiskt arbete</h2>
-      <p class="lede">
-        AI Legal Academy kombinerar live-sessioner med en interaktiv legal AI-miljö där deltagaren arbetar direkt i realistiska juridiska scenarier.
-      </p>
-    </div>
-
-    <div class="reveal">
-      <div class="dash" aria-hidden="true">
-        <div class="dash__bar">
-          <span class="dash__title">AI Legal Academy · Workspace overview</span>
-          <span style="margin-left:auto">cohort 01 · vt 2026</span>
-        </div>
-        <div class="dash__grid">
-          <div class="dash__cell">
-            <div class="dash__label">Live-sessioner</div>
-            <div class="dash__big accent">06</div>
-            <div class="dash__small">Coachade övningar i grupp och individuellt.</div>
-          </div>
-          <div class="dash__cell">
-            <div class="dash__label">Realistiska case</div>
-            <div class="dash__big">12+</div>
-            <div class="dash__small">M&amp;A, kommersiella avtal, riskanalys och intern rådgivning.</div>
-          </div>
-          <div class="dash__cell">
-            <div class="dash__label">Format</div>
-            <div class="dash__small" style="font-size:14px; color:var(--text);">
-              Live-sessioner och hands-on övningar direkt i den interaktiva legal AI-miljön. Egen workspace per deltagare.
+    <div class="reveal" style="max-width: 64ch;">
+      <div class="verify" aria-hidden="true">
+        <ul class="verify__list">
+          <li>
+            <span class="verify__check"></span>
+            <div class="verify__row">
+              <strong>Verifiering mot källdokument</strong>
+              <span>Kontroll att slutsatser och citat stämmer med originaltexten.</span>
             </div>
-          </div>
-          <div class="dash__cell">
-            <div class="dash__label">Programmet innehåller</div>
-            <ul class="dash__list">
-              <li>Live-sessioner och coachade övningar</li>
-              <li>Individuell workspace och inloggning</li>
-              <li>Realistiska juridiska case och dokument</li>
-            </ul>
-          </div>
-          <div class="dash__cell">
-            <div class="dash__label">Arbetssätt</div>
-            <ul class="dash__list">
-              <li>Hands-on arbete direkt i AI-miljön</li>
-              <li>Guidning genom overlays och steg-för-steg</li>
-              <li>Feedback på prompts, analys och metod</li>
-            </ul>
-          </div>
-          <div class="dash__cell" style="border-right:0">
-            <div class="dash__label">Output</div>
-            <ul class="dash__list">
-              <li>AI-assisterade workflows</li>
-              <li>Artefakter och prompts att ta med tillbaka</li>
-              <li>Praktiska arbetssätt i realistiska case</li>
-            </ul>
-          </div>
-        </div>
+          </li>
+          <li>
+            <span class="verify__check"></span>
+            <div class="verify__row">
+              <strong>Bedömning av AI-svarens kvalitet</strong>
+              <span>Är svaret tillräckligt precist, fullständigt och stödbart?</span>
+            </div>
+          </li>
+          <li>
+            <span class="verify__check"></span>
+            <div class="verify__row">
+              <strong>Identifiering av osäkra slutsatser</strong>
+              <span>Markera resonemang som behöver vidare verifiering eller juridisk analys.</span>
+            </div>
+          </li>
+          <li>
+            <span class="verify__check"></span>
+            <div class="verify__row">
+              <strong>Juridiskt omdöme och riskbedömning</strong>
+              <span>Vad är faktiskt risken för klienten i den givna kontexten?</span>
+            </div>
+          </li>
+          <li>
+            <span class="verify__check"></span>
+            <div class="verify__row">
+              <strong>När AI bör användas och inte</strong>
+              <span>Vilka steg passar för AI-stöd och vilka kräver juristen själv?</span>
+            </div>
+          </li>
+        </ul>
       </div>
-    </div>
-
-    <div class="two-col reveal" style="margin-top: 40px;">
-      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll.</p>
-      <p class="body-text accent" style="font-family:var(--display); font-size:26px; line-height:1.2; font-style:italic;">
-        Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.
-      </p>
     </div>
   </div>
 </section>
@@ -1609,10 +1635,9 @@
     <div class="reveal">
       <h2 class="h-section">För nästa generations juridiska arbete</h2>
       <div class="body-text">
-        <p>Nästa generations jurister kommer inte bara använda AI ibland.</p>
-        <p>De kommer arbeta i AI-native juridiska arbetsflöden, tillsammans med AI som en integrerad del av arbetet.</p>
+        <p>Nästa generations jurister kommer inte bara använda AI ibland, utan arbeta i AI-native juridiska arbetsflöden tillsammans med AI som en integrerad del av arbetet.</p>
         <p style="font-family:var(--display); font-size:clamp(26px, 3vw, 36px); line-height:1.15; color:var(--accent); font-style:italic; margin-top: 28px;">
-          AI Legal Academy är byggt för att hjälpa jurister ta steget dit i praktiken.
+          Programmet är byggt för att hjälpa jurister ta steget dit i praktiken.
         </p>
       </div>
     </div>
