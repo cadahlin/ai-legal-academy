@@ -12,7 +12,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&family=DM+Sans:wght@300;400;500&family=Inter:wght@200;300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
   /* ---------- Tokens ---------- */
@@ -108,11 +108,19 @@
 
   p { margin: 0; }
   .lede {
-    font-size: clamp(17px, 1.4vw, 19px);
-    line-height: 1.55;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
     color: var(--text);
   }
-  .body-text { color: var(--text); }
+  .body-text {
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
+  }
   .body-text p + p { margin-top: 14px; }
   .muted { color: var(--text-2); }
   .small { font-size: 14px; line-height: 1.5; color: var(--text-2); }
@@ -174,9 +182,24 @@
 
   /* ---------- Hero ---------- */
   .hero { padding-top: clamp(28px, 4vw, 56px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 0; }
-  .hero__heading { max-width: 18ch; margin-bottom: 28px; }
-  .hero__sub { max-width: 62ch; color: var(--text); font-size: clamp(18px, 1.55vw, 22px); line-height: 1.45; }
-  .hero__support { max-width: 60ch; margin-top: 18px; color: #ffffff; font-size: 16px; line-height: 1.55; }
+  .hero__heading { max-width: 24ch; margin-bottom: 28px; }
+  .hero__sub {
+    max-width: 78ch;
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
+  }
+  .hero__support {
+    max-width: 78ch;
+    margin-top: 18px;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
+  }
 
   .hero__visual { margin-top: clamp(48px, 6vw, 80px); }
 
@@ -546,13 +569,34 @@
   .bullet-list li {
     padding: 12px 0;
     border-top: 1px solid var(--border);
-    display: flex; gap: 14px; align-items: baseline;
+    display: flex; gap: 14px; align-items: center;
     font-size: 15px; color: var(--text);
   }
   .bullet-list li:last-child { border-bottom: 1px solid var(--border); }
   .bullet-list li::before {
     content: ""; width: 5px; height: 5px; background: var(--accent);
-    border-radius: 50%; flex-shrink: 0; transform: translateY(7px);
+    border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ---------- Accreditation ---------- */
+  .accreditation__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: clamp(28px, 5vw, 72px);
+    align-items: center;
+  }
+  .accreditation__logo {
+    width: min(220px, 52vw);
+    opacity: 0.9;
+    justify-self: end;
+  }
+  .accreditation .body-text {
+    max-width: 64ch;
+    margin-top: 20px;
+  }
+  @media (max-width: 720px) {
+    .accreditation__grid { grid-template-columns: 1fr; }
+    .accreditation__logo { width: min(210px, 70vw); justify-self: start; }
   }
 
   /* Firm scenario mockup */
@@ -677,7 +721,7 @@
     border: 1px solid var(--text-3);
     border-radius: var(--radius);
     margin: 4px;
-    min-height: 140px;
+    min-height: 176px;
     display: flex; flex-direction: column;
     background: var(--surface-2);
   }
@@ -690,10 +734,10 @@
     color: var(--text); font-weight: 700;
   }
   .artifact__icon {
-    margin-top: auto;
-    padding-top: 16px;
-    width: 32px;
-    height: 32px;
+    margin-top: 44px;
+    padding-top: 0;
+    width: 48px;
+    height: 48px;
     color: var(--accent);
     opacity: 0.85;
   }
@@ -914,7 +958,6 @@
   }
   .vision .body-text {
     margin-top: 28px; max-width: 60ch;
-    font-size: clamp(17px, 1.4vw, 19px); line-height: 1.5;
     color: var(--text);
   }
   .vision .body-text p + p { margin-top: 16px; }
@@ -961,10 +1004,10 @@
         Lär dig AI av juristerna som ligger <span class="italic accent">steget före</span>
       </h1>
       <p class="hero__sub">
-        Programmet hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
+        En kurs i grupp som hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
       </p>
       <p class="hero__support">
-        Ett praktiskt utbildningsprogram för juridiska organisationer som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
+        För dig som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
       </p>
     </div>
 
@@ -983,7 +1026,7 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p style="color: var(--text);">Programmet bygger på insikter från jurister med praktisk erfarenhet av juridiska arbetsflöden, AI-adoption och moderna legal teams.</p>
+        <p>Programmet bygger på insikter från jurister som jobbar hands-on dagligen med AI-verktyg.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms"></div>
     </div>
@@ -1030,12 +1073,10 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Många juridiska organisationer investerar redan i AI genom licenser, pilotprojekt, interna utbildningar och nya verktyg.</p>
-        <p>Men tillgång till AI är inte samma sak som faktisk användning.</p>
-        <p>Traditionella AI-utbildningar skapar ofta förståelse. Deltagarna lär sig begrepp, risker och grundläggande prompting. Men efteråt är steget fortfarande stort från kursrummet till det dagliga juridiska arbetet.</p>
+        <p>Många juridiska organisationer investerar redan i AI genom licenser, pilotprojekt och interna utbildningar.</p>
+        <p>Men tillgång till AI är inte samma sak som faktisk användning. Traditionella utbildningar skapar förståelse, men lämnar ofta ett gap mellan kursrummet och det dagliga juridiska arbetet.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Det är där många initiativ tappar fart. För att AI ska börja användas strukturerat i avtal, due diligence, riskanalys, klientarbete och interna processer krävs något mer än inspiration. Det krävs praktisk träning i realistiska arbetsflöden.</p>
       </div>
     </div>
 
@@ -1073,8 +1114,7 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Programmet kombinerar live-utbildning med en interaktiv legal AI-miljö där jurister tränar på realistiska juridiska arbetsflöden.</p>
-        <p>Varje deltagare får ett eget login. Verktyget är open source och liknar i utseende de ledande verktygen.</p>
+        <p>Programmet kombinerar live-utbildning med en interaktiv legal AI-miljö där varje deltagare får eget login och tränar direkt i realistiska juridiska arbetsflöden.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms"></div>
     </div>
@@ -1085,7 +1125,7 @@
 
     <div class="two-col reveal" style="margin-top: 40px; margin-bottom: 40px;">
       <div class="body-text">
-        <p>Deltagaren arbetar med case, dokument och AI-stöd direkt i miljön, samtidigt som systemet guidar, coachar och förklarar nästa steg.</p>
+        <p>Deltagaren arbetar med case, dokument och AI-stöd medan systemet guidar nästa steg.</p>
       </div>
       <div class="body-text"></div>
     </div>
@@ -1105,10 +1145,10 @@
 
     <div class="two-col" style="margin-bottom: 40px;">
       <div class="body-text reveal">
-        <p>Coachade övningar i grupp och individuellt. Programmet kombinerar livesessioner via videomöten med en interaktiv legal AI-miljö där deltagarna arbetar direkt i realistiska juridiska scenarier.</p>
+        <p>Coachade övningar sker både i grupp och individuellt, med livesessioner via videomöten.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Alla deltagare får ett eget login till miljön.</p>
+        <p>Deltagarna arbetar praktiskt i juridiska scenarier, inte genom att passivt konsumera innehåll.</p>
       </div>
     </div>
 
@@ -1116,9 +1156,6 @@
       <img src="3-group.png" alt="AI Legal Academy Workshop - Group video session with 12 participants" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
     </div>
 
-    <div class="two-col reveal" style="margin-top: 40px;">
-      <p class="body-text">Fokus ligger inte på att passivt konsumera innehåll. Fokus ligger på att träna praktiskt arbete i AI-native juridiska workflows.</p>
-    </div>
   </div>
 </section>
 
@@ -1131,11 +1168,11 @@
 
     <div class="two-col" style="margin-bottom: 40px;">
       <div class="body-text reveal">
-        <p>Programmet tränar inte bara generella AI-färdigheter. Det utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.</p>
-        <p>Många jurister har redan testat AI i några situationer: sammanfatta text, skriva om ett utkast eller ställa en fråga om ett dokument. Men bredden är större än så.</p>
+        <p>Programmet utgår från arbetsmoment som redan finns i juridiska organisationer, men där LLM:er kan ge tydlig hävstång.</p>
+        <p>Många jurister har testat AI för att sammanfatta text, skriva om utkast eller ställa frågor om dokument. Bredden är större än så.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Poängen är inte att juristen ska bemästra allt direkt. Poängen är att deltagaren får se, testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
+        <p>Deltagaren får testa och känna igen användningsfallen, så att de kan återkomma till dem när rätt situation uppstår i vardagen.</p>
       </div>
     </div>
 
@@ -1146,7 +1183,7 @@
           <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div class="uc__num">01</div>
-        <div class="uc__title">Research &amp; Document Q&amp;A</div>
+        <div class="uc__title">Understanding the Deal Faster</div>
       </div>
       <div class="uc is-done reveal" style="--reveal-delay:40ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -1154,7 +1191,7 @@
           <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div class="uc__num">02</div>
-        <div class="uc__title">Drafting &amp; Revising</div>
+        <div class="uc__title">Interrogating Agreements with AI</div>
       </div>
       <div class="uc is-done reveal" style="--reveal-delay:80ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
@@ -1162,42 +1199,42 @@
           <path d="M5.2 9.3l2.6 2.6 5-5.6" stroke="#0D0C0A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         <div class="uc__num">03</div>
-        <div class="uc__title">Document Review &amp; Analysis</div>
+        <div class="uc__title">Verification &amp; Hallucination Control</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:120ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
         </svg>
         <div class="uc__num">04</div>
-        <div class="uc__title">Summarize &amp; Report</div>
+        <div class="uc__title">Spotting Hidden Commercial Risk</div>
       </div>
       <div class="uc reveal">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
         </svg>
         <div class="uc__num">05</div>
-        <div class="uc__title">Translation &amp; Tone Adaptation</div>
+        <div class="uc__title">Writing PMs, Briefings &amp; Client Advice</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:40ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
         </svg>
         <div class="uc__num">06</div>
-        <div class="uc__title">Writing, References &amp; Client Emails</div>
+        <div class="uc__title">Building Tables, Timelines &amp; Trackers</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:80ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
         </svg>
         <div class="uc__num">07</div>
-        <div class="uc__title">Knowledge Management</div>
+        <div class="uc__title">Negotiating with AI</div>
       </div>
       <div class="uc reveal" style="--reveal-delay:120ms">
         <svg class="uc__icon" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <circle cx="9" cy="9" r="8" stroke="#4A4A4A" stroke-width="1"/>
         </svg>
         <div class="uc__num">08</div>
-        <div class="uc__title">Business Support</div>
+        <div class="uc__title">Managing Large Document Sets</div>
       </div>
     </div>
   </div>
@@ -1211,11 +1248,36 @@
     </div>
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Utmaningen är inte längre tillgång till AI. Utmaningen är adoption.</p>
-        <p>Programmet hjälper jurister gå från sporadisk användning till praktiska arbetssätt som faktiskt används i det dagliga arbetet.</p>
+        <p>Utmaningen är inte längre tillgång till AI, utan adoption i det dagliga arbetet.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Oavsett om du arbetar på byrå eller inhouse tränar programmet på de arbetsmoment där AI ger störst hävstång: contract review, due diligence, riskanalys och klientkommunikation.</p>
+        <p>Programmet tränar på arbetsmoment där AI ger tydlig hävstång: contract review, due diligence, riskanalys och klientkommunikation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== 9. COURSE PROGRESSION ============== -->
+<section id="course-progression">
+  <div class="wrap">
+    <div class="reveal">
+      <img src="2c-module-retrospective.png" alt="Module retrospective overview" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
+    </div>
+  </div>
+</section>
+
+<!-- ============== 9. ACCREDITATION ============== -->
+<section class="accreditation" id="accreditation">
+  <div class="wrap">
+    <div class="accreditation__grid">
+      <div class="reveal">
+        <h2 class="h-section">Kursen uppfyller kraven från Advokatsamfundet</h2>
+        <div class="body-text">
+          <p>Kursen ger utbildningstimmar och räknas mot de 18 timmar vidareutbildning som varje advokat ska genomföra per år. Upp till 6 av de 18 timmarna får vara webbaserad.</p>
+        </div>
+      </div>
+      <div class="reveal" style="--reveal-delay:80ms">
+        <img src="advokatsamfundet-logo-se.svg" alt="Advokatsamfundet" class="accreditation__logo">
       </div>
     </div>
   </div>
