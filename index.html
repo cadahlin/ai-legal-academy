@@ -181,6 +181,23 @@
   }
 
   /* ---------- Hero ---------- */
+  .draft-strip {
+    padding: 18px 0 0;
+  }
+  .draft-pill {
+    display: inline-flex;
+    align-items: center;
+    height: 34px;
+    padding: 0 16px;
+    border: 1px solid rgba(200, 192, 176, 0.45);
+    border-radius: 999px;
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background: #584990;
+  }
   .hero { padding-top: clamp(28px, 4vw, 56px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 0; }
   .hero__heading { max-width: 24ch; margin-bottom: 28px; }
   .hero__sub {
@@ -996,6 +1013,12 @@
 </head>
 <body>
 
+<div class="draft-strip">
+  <div class="wrap">
+    <div class="draft-pill">DRAFT</div>
+  </div>
+</div>
+
 <!-- ============== 1. HERO ============== -->
 <section class="hero">
   <div class="wrap">
@@ -1047,7 +1070,7 @@
         </div>
       </div>
       <div class="profile reveal" style="--reveal-delay:80ms">
-        <div class="profile__photo" aria-label="Placeholder for photo">[Lägg till<br>foto]</div>
+        <img src="3-Lawyer.png" alt="Senior Associate" class="profile__photo">
         <div>
           <div class="profile__role">Senior Associate</div>
           <div class="profile__org">Advokatfirman XYZ</div>
@@ -1354,36 +1377,36 @@
           <li>
             <span class="verify__check"></span>
             <div class="verify__row">
-              <strong>Verifiering mot källdokument</strong>
-              <span>Kontroll att slutsatser och citat stämmer med originaltexten.</span>
+              <strong>Hallucinationer och påhittade källor</strong>
+              <span>Känna igen när AI fyller i luckor, hittar på referenser eller låter säker utan stöd.</span>
             </div>
           </li>
           <li>
             <span class="verify__check"></span>
             <div class="verify__row">
-              <strong>Bedömning av AI-svarens kvalitet</strong>
-              <span>Är svaret tillräckligt precist, fullständigt och stödbart?</span>
+              <strong>Spårbarhet till underlaget</strong>
+              <span>Krav på att varje slutsats, citat och riskmarkering kan följas tillbaka till rätt dokument.</span>
             </div>
           </li>
           <li>
             <span class="verify__check"></span>
             <div class="verify__row">
-              <strong>Identifiering av osäkra slutsatser</strong>
-              <span>Markera resonemang som behöver vidare verifiering eller juridisk analys.</span>
+              <strong>Promptkänslighet och fel antaganden</strong>
+              <span>Testa hur svaret förändras när frågan, kontexten eller instruktionen ändras.</span>
             </div>
           </li>
           <li>
             <span class="verify__check"></span>
             <div class="verify__row">
-              <strong>Juridiskt omdöme och riskbedömning</strong>
-              <span>Vad är faktiskt risken för klienten i den givna kontexten?</span>
+              <strong>Konfidens utan precision</strong>
+              <span>Skilja mellan ett välformulerat svar och ett svar som faktiskt är komplett, relevant och verifierbart.</span>
             </div>
           </li>
           <li>
             <span class="verify__check"></span>
             <div class="verify__row">
-              <strong>När AI bör användas och inte</strong>
-              <span>Vilka steg passar för AI-stöd och vilka kräver juristen själv?</span>
+              <strong>Mänsklig kontroll i rätt steg</strong>
+              <span>Avgöra vilka moment AI kan accelerera och var juristen måste ta över, kontrollera eller avstå.</span>
             </div>
           </li>
         </ul>
