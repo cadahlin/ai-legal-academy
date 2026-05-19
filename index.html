@@ -440,14 +440,14 @@
     text-transform: uppercase; color: var(--text-3); margin-bottom: 14px;
   }
   .strip__title {
-    font-family: var(--display); font-size: 22px; line-height: 1.2;
+    font-family: var(--display); font-size: 28px; line-height: 1.15;
     color: var(--text-2); font-weight: 700; margin-bottom: 8px;
   }
   .strip.is-emphasis .strip__label { color: var(--accent); }
   .strip.is-emphasis .strip__title { color: var(--text); }
   .strip__list {
     margin: 0; padding: 0; list-style: none;
-    font-size: 14.5px; color: var(--text-2); line-height: 1.55;
+    font-size: 17px; color: var(--text-2); line-height: 1.5;
   }
   .strip__list li {
     padding: 8px 0;
@@ -835,11 +835,11 @@
     text-align: center; padding: 8px;
   }
   .profile__role {
-    font-family: var(--display); font-size: 20px; line-height: 1.2;
+    font-family: var(--display); font-size: 26px; line-height: 1.15;
     color: var(--text); font-weight: 700; margin-bottom: 2px;
   }
   .profile__org {
-    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    font-family: var(--mono); font-size: 15px; color: var(--accent);
     letter-spacing: 0.06em; margin-bottom: 12px;
   }
   .profile__desc {
@@ -858,6 +858,36 @@
     font-size: 11px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+  }
+  .practitioner-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0 32px;
+    margin: 28px 0 0;
+    padding: 18px 22px;
+    list-style: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .practitioner-list li {
+    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    color: var(--text);
+    font-size: 18px;
+  }
+  .practitioner-list li::before {
+    content: "";
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  @media (max-width: 640px) {
+    .practitioner-list { grid-template-columns: 1fr; }
   }
 
   /* ---------- Format dashboard ---------- */
@@ -1042,7 +1072,7 @@
         Lär dig AI av juristerna som ligger <span class="italic accent">steget före</span>
       </h1>
       <p class="hero__sub">
-        En kurs i grupp som hjälper jurister att gå från AI-intresse till faktisk användning genom realistiska case, interaktiva övningar och träning i en AI-native legal workspace.
+        En kurs i grupp som hjälper dig gå från AI-intresse till faktisk användning genom guidade, interaktiva cases och coaching från de jurister som testar gränserna.
       </p>
       <p class="hero__support">
         För dig som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
@@ -1082,11 +1112,22 @@
         <img src="3-Lawyer.png" alt="Senior Associate" class="profile__photo">
         <div>
           <div class="profile__role">Senior Associate</div>
-          <div class="profile__org">Advokatfirman XYZ</div>
+          <div class="profile__org">Advokatfirma</div>
           <div class="profile__pill">To be announced</div>
         </div>
       </div>
     </div>
+
+    <ul class="practitioner-list reveal" style="--reveal-delay:140ms">
+      <li>Prompt-bibliotek</li>
+      <li>Mentala ramverk</li>
+      <li>Mindset</li>
+      <li>Flerstegs-flöden</li>
+      <li>Playbooks</li>
+      <li>Lessons learned / scar tissue</li>
+      <li>Cheat sheets</li>
+    </ul>
+
   </div>
 </section>
 
@@ -1158,6 +1199,9 @@
 
     <div class="solution-visual reveal">
       <img src="2-workspace.png" alt="Project workspace with documents" style="width: 100%; max-width: 100%; border-radius: 6px; box-shadow: 0 24px 60px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.02) inset;">
+    </div>
+    <div class="body-text reveal" style="margin-top: 24px;">
+      <p>Verktyget är förberett med verklighetsnära material utan konfidentiell information.</p>
     </div>
   </div>
 </section>
