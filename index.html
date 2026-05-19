@@ -738,7 +738,7 @@
     border: 1px solid var(--text-3);
     border-radius: var(--radius);
     margin: 4px;
-    min-height: 176px;
+    min-height: 164px;
     display: flex; flex-direction: column;
     background: var(--surface-2);
   }
@@ -751,7 +751,8 @@
     color: var(--text); font-weight: 700;
   }
   .artifact__icon {
-    margin-top: 44px;
+    margin-top: 0;
+    margin-bottom: 28px;
     padding-top: 0;
     width: 48px;
     height: 48px;
@@ -843,6 +844,20 @@
   }
   .profile__desc {
     font-size: 14.5px; line-height: 1.55; color: var(--text-2);
+  }
+  .profile__pill {
+    display: inline-flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 12px;
+    margin-top: 14px;
+    border-radius: 999px;
+    background: #584990;
+    color: #ffffff;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
   }
 
   /* ---------- Format dashboard ---------- */
@@ -1060,13 +1075,7 @@
         <div>
           <div class="profile__role">General Counsel</div>
           <div class="profile__org">Large technology company in Sweden</div>
-          <ul class="bullet-list" style="margin-top: 14px;">
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Sed do eiusmod tempor incididunt</li>
-            <li>Ut labore et dolore magna aliqua</li>
-            <li>Quis nostrud exercitation ullamco</li>
-          </ul>
+          <div class="profile__pill">To be announced</div>
         </div>
       </div>
       <div class="profile reveal" style="--reveal-delay:80ms">
@@ -1074,13 +1083,7 @@
         <div>
           <div class="profile__role">Senior Associate</div>
           <div class="profile__org">Advokatfirman XYZ</div>
-          <ul class="bullet-list" style="margin-top: 14px;">
-            <li>Lorem ipsum dolor sit amet</li>
-            <li>Consectetur adipiscing elit</li>
-            <li>Sed do eiusmod tempor incididunt</li>
-            <li>Ut labore et dolore magna aliqua</li>
-            <li>Quis nostrud exercitation ullamco</li>
-          </ul>
+          <div class="profile__pill">To be announced</div>
         </div>
       </div>
     </div>
@@ -1271,11 +1274,9 @@
     </div>
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Utmaningen är inte längre tillgång till AI, utan adoption i det dagliga arbetet.</p>
+        <p>Passar även bolagsjurister, där AI behöver avändas i en miljö av policies och riktlinjer, interna positioner och fallbacks, legal triage m.m.</p>
       </div>
-      <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Programmet tränar på arbetsmoment där AI ger tydlig hävstång: contract review, due diligence, riskanalys och klientkommunikation.</p>
-      </div>
+      <div class="body-text reveal" style="--reveal-delay:80ms"></div>
     </div>
   </div>
 </section>
@@ -1315,10 +1316,9 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Inte teori om AI — utan konkret förståelse för vilka arbetsmoment som faktiskt förbättras med AI, hur man arbetar med dem och var begränsningarna finns.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms">
-        <p>Deltagaren bygger upp egna artefakter direkt i miljön och tar med sig arbetssätt som fungerar i verkligt juridiskt arbete.</p>
+        <p>Du som deltagare samlar på dig byggstenar att ta med hem.</p>
       </div>
     </div>
 
@@ -1368,7 +1368,7 @@
 <section id="verify">
   <div class="wrap">
     <div class="sec-head reveal">
-      <h2 class="h-section">Träning i användning, verifiering och juridiskt omdöme</h2>
+      <h2 class="h-section">Träning i verifiering</h2>
     </div>
 
     <div class="reveal" style="max-width: 64ch;">
@@ -1393,13 +1393,6 @@
             <div class="verify__row">
               <strong>Promptkänslighet och fel antaganden</strong>
               <span>Testa hur svaret förändras när frågan, kontexten eller instruktionen ändras.</span>
-            </div>
-          </li>
-          <li>
-            <span class="verify__check"></span>
-            <div class="verify__row">
-              <strong>Konfidens utan precision</strong>
-              <span>Skilja mellan ett välformulerat svar och ett svar som faktiskt är komplett, relevant och verifierbart.</span>
             </div>
           </li>
           <li>
