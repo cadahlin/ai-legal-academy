@@ -199,9 +199,10 @@
     background: #584990;
   }
   .hero { padding-top: clamp(28px, 4vw, 56px); padding-bottom: clamp(56px, 7vw, 96px); border-top: 0; }
-  .hero__heading { max-width: 24ch; margin-bottom: 28px; }
+  .hero__heading { max-width: 24ch; margin-bottom: 44px; }
   .hero__sub {
     max-width: 78ch;
+    margin-top: 0;
     color: var(--text);
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
     font-size: clamp(19px, 1.6vw, 23px);
@@ -210,13 +211,23 @@
   }
   .hero__support {
     max-width: 78ch;
-    margin-top: 18px;
+    margin-top: 16px;
     color: #ffffff;
     font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
     font-size: clamp(19px, 1.6vw, 23px);
     line-height: 1.45;
     font-weight: 200;
   }
+  .hero__intro {
+    max-width: 86ch;
+    margin-top: 0;
+    color: var(--text);
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
+  }
+  .hero__intro + .hero__intro { margin-top: 16px; }
 
   .hero__visual { margin-top: clamp(48px, 6vw, 80px); }
 
@@ -870,6 +881,14 @@
     border: 1px solid var(--border);
     border-radius: var(--radius);
   }
+  .practitioner-list__intro {
+    margin-top: 34px;
+    font-family: 'Inter', system-ui, -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+    font-size: clamp(19px, 1.6vw, 23px);
+    line-height: 1.45;
+    font-weight: 200;
+    color: var(--text);
+  }
   .practitioner-list li {
     padding: 12px 0;
     display: flex;
@@ -1013,13 +1032,13 @@
     padding: clamp(80px, 11vw, 160px) 0 clamp(64px, 9vw, 120px);
   }
   .vision h2 {
-    max-width: 22ch;
+    max-width: 100%;
     font-size: clamp(44px, 6.5vw, 88px);
     line-height: 1.02;
     letter-spacing: -0.02em;
   }
   .vision .body-text {
-    margin-top: 28px; max-width: 60ch;
+    margin-top: 28px; max-width: 78ch;
     color: var(--text);
   }
   .vision .body-text p + p { margin-top: 16px; }
@@ -1071,12 +1090,8 @@
       <h1 class="h-display hero__heading">
         Lär dig AI av juristerna som ligger <span class="italic accent">steget före</span>
       </h1>
-      <p class="hero__sub">
-        En kurs i grupp som hjälper dig gå från AI-intresse till faktisk användning genom guidade, interaktiva cases och coaching från de jurister som testar gränserna.
-      </p>
-      <p class="hero__support">
-        För dig som vill att AI ska bli en del av det faktiska arbetet, inte bara något man förstår i teorin.
-      </p>
+      <p class="hero__intro">En praktisk gruppkurs för jurister som vill gå från AI-intresse till faktisk användning i juridiskt arbete.</p>
+      <p class="hero__intro">Kursen bygger på insikter från jurister som själva arbetar hands-on med AI och kombinerar guidade case, coachad träning, verklighetsnära use cases och en interaktiv legal AI-miljö. Deltagaren lämnar kursen med konkreta byggstenar, arbetssätt och material att ta med tillbaka till byrån eller det inhouse legal teamet.</p>
     </div>
 
     <div class="hero__visual reveal" style="--reveal-delay:120ms">
@@ -1094,7 +1109,7 @@
 
     <div class="two-col">
       <div class="body-text reveal">
-        <p>Programmet bygger på insikter från jurister som jobbar hands-on dagligen med AI-verktyg.</p>
+        <p>Programmet bygger på insikter från jurister som jobbar hands-on dagligen med AI-verktyg och ständigt testar det nya.</p>
       </div>
       <div class="body-text reveal" style="--reveal-delay:80ms"></div>
     </div>
@@ -1113,11 +1128,12 @@
         <div>
           <div class="profile__role">Senior Associate</div>
           <div class="profile__org">Advokatfirma</div>
-          <div class="profile__pill">To be announced</div>
+          <div class="profile__pill">Sökes</div>
         </div>
       </div>
     </div>
 
+    <div class="practitioner-list__intro reveal" style="--reveal-delay:120ms">Byggt på sådant de själva använder:</div>
     <ul class="practitioner-list reveal" style="--reveal-delay:140ms">
       <li>Prompt-bibliotek</li>
       <li>Mentala ramverk</li>
